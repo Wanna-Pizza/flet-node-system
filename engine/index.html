@@ -6,11 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Visual node editor + async Python runtime for dataflow applications">
+      
+      
+        <meta name="author" content="Flet Contributors">
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../examples/">
       
+      
+        <link rel="next" href="../building/">
       
       
         
@@ -21,11 +27,14 @@
     
     
       
-        <title>Engine - FletNodes</title>
+        <title>Engine - Flet Node System</title>
       
     
     
       <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -55,7 +64,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -80,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="FletNodes" class="md-header__button md-logo" aria-label="FletNodes" data-md-component="logo">
+    <a href=".." title="Flet Node System" class="md-header__button md-logo" aria-label="Flet Node System" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -94,7 +110,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            FletNodes
+            Flet Node System
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -107,11 +123,35 @@
       </div>
     </div>
     
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="cyan"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Wanna-Pizza/flet-node-system" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    flet-node-system
+  </div>
+</a>
+      </div>
     
   </nav>
   
@@ -138,14 +178,26 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="FletNodes" class="md-nav__button md-logo" aria-label="FletNodes" data-md-component="logo">
+    <a href=".." title="Flet Node System" class="md-nav__button md-logo" aria-label="Flet Node System" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    FletNodes
+    Flet Node System
   </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Wanna-Pizza/flet-node-system" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    flet-node-system
+  </div>
+</a>
+    </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
     
@@ -164,6 +216,114 @@
     
   
     Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
   
 
     
@@ -243,10 +403,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#what-youll-learn-here" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Overview
+        What You'll Learn Here
       
     </span>
   </a>
@@ -254,30 +414,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#core-features" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        Core Features
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Architecture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#layer-separation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Layer Separation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -327,10 +470,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-nodesfield-integration-flet_nodespy" class="md-nav__link">
+  <a href="#4-integration-flet_nodespy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. NodesField Integration (flet_nodes.py)
+        4. Integration (flet_nodes.py)
       
     </span>
   </a>
@@ -343,22 +486,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#step-by-step-register-create-execute" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Usage
+        Step-by-Step: Register → Create → Execute
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Usage">
+    <nav class="md-nav" aria-label="Step-by-Step: Register → Create → Execute">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-register-node-logic" class="md-nav__link">
+  <a href="#step-1-register-node-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Register Node Logic
+        Step 1: Register Node Logic
       
     </span>
   </a>
@@ -366,10 +509,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-create-nodes" class="md-nav__link">
+  <a href="#step-2-create-nodes-in-ui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Create Nodes
+        Step 2: Create Nodes in UI
       
     </span>
   </a>
@@ -377,21 +520,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-execute-nodes" class="md-nav__link">
+  <a href="#step-3-execute-from-python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Execute Nodes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-access-ui-content-in-logic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Access UI Content in Logic
+        Step 3: Execute from Python
       
     </span>
   </a>
@@ -404,10 +536,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-logic-implementations" class="md-nav__link">
+  <a href="#accessing-ui-content-in-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example Logic Implementations
+        Accessing UI Content in Logic
       
     </span>
   </a>
@@ -415,44 +547,50 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#execution-flow" class="md-nav__link">
+  <a href="#how-execution-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Execution Flow
+        How Execution Works
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connection-synchronization" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Connection Synchronization
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#advanced-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Advanced Features
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Advanced Features">
+    <nav class="md-nav" aria-label="How Execution Works">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#custom-logic-validation" class="md-nav__link">
+  <a href="#the-pull-based-algorithm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Custom Logic Validation
+        The Pull-Based Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Pull-Based Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Walkthrough
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concurrency-with-asynciogather" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concurrency with asyncio.gather()
       
     </span>
   </a>
@@ -460,10 +598,38 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#lifecycle-callbacks" class="md-nav__link">
+  <a href="#caching-avoid-redundant-work" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lifecycle Callbacks
+        Caching: Avoid Redundant Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Techniques
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Techniques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-validation-in-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input Validation in Logic
       
     </span>
   </a>
@@ -471,10 +637,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#execution-order-analysis" class="md-nav__link">
+  <a href="#execution-order-inspection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Execution Order Analysis
+        Execution Order Inspection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#async-operations-in-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Async Operations in Logic
       
     </span>
   </a>
@@ -509,10 +686,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing" class="md-nav__link">
+  <a href="#testing-node-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        Testing Node Logic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Node Logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-test-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Test Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-test-full-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Test: Full Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Philosophy
       
     </span>
   </a>
@@ -520,21 +736,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#design-principles" class="md-nav__link">
+  <a href="#files-in-the-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design Principles
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#files-created" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Files Created
+        Files in the Engine
       
     </span>
   </a>
@@ -552,21 +757,37 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        License
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../building/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -598,10 +819,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#what-youll-learn-here" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Overview
+        What You'll Learn Here
       
     </span>
   </a>
@@ -609,30 +830,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#core-features" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        Core Features
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Architecture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#layer-separation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Layer Separation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -682,10 +886,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-nodesfield-integration-flet_nodespy" class="md-nav__link">
+  <a href="#4-integration-flet_nodespy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. NodesField Integration (flet_nodes.py)
+        4. Integration (flet_nodes.py)
       
     </span>
   </a>
@@ -698,22 +902,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#step-by-step-register-create-execute" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Usage
+        Step-by-Step: Register → Create → Execute
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Usage">
+    <nav class="md-nav" aria-label="Step-by-Step: Register → Create → Execute">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-register-node-logic" class="md-nav__link">
+  <a href="#step-1-register-node-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Register Node Logic
+        Step 1: Register Node Logic
       
     </span>
   </a>
@@ -721,10 +925,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-create-nodes" class="md-nav__link">
+  <a href="#step-2-create-nodes-in-ui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Create Nodes
+        Step 2: Create Nodes in UI
       
     </span>
   </a>
@@ -732,21 +936,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-execute-nodes" class="md-nav__link">
+  <a href="#step-3-execute-from-python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Execute Nodes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-access-ui-content-in-logic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Access UI Content in Logic
+        Step 3: Execute from Python
       
     </span>
   </a>
@@ -759,10 +952,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-logic-implementations" class="md-nav__link">
+  <a href="#accessing-ui-content-in-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example Logic Implementations
+        Accessing UI Content in Logic
       
     </span>
   </a>
@@ -770,44 +963,50 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#execution-flow" class="md-nav__link">
+  <a href="#how-execution-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Execution Flow
+        How Execution Works
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connection-synchronization" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Connection Synchronization
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#advanced-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Advanced Features
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Advanced Features">
+    <nav class="md-nav" aria-label="How Execution Works">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#custom-logic-validation" class="md-nav__link">
+  <a href="#the-pull-based-algorithm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Custom Logic Validation
+        The Pull-Based Algorithm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Pull-Based Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Walkthrough
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concurrency-with-asynciogather" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concurrency with asyncio.gather()
       
     </span>
   </a>
@@ -815,10 +1014,38 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#lifecycle-callbacks" class="md-nav__link">
+  <a href="#caching-avoid-redundant-work" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lifecycle Callbacks
+        Caching: Avoid Redundant Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Techniques
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Techniques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-validation-in-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input Validation in Logic
       
     </span>
   </a>
@@ -826,10 +1053,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#execution-order-analysis" class="md-nav__link">
+  <a href="#execution-order-inspection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Execution Order Analysis
+        Execution Order Inspection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#async-operations-in-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Async Operations in Logic
       
     </span>
   </a>
@@ -864,10 +1102,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing" class="md-nav__link">
+  <a href="#testing-node-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        Testing Node Logic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Node Logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-test-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Test Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-test-full-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Test: Full Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Philosophy
       
     </span>
   </a>
@@ -875,21 +1152,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#design-principles" class="md-nav__link">
+  <a href="#files-in-the-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design Principles
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#files-created" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Files Created
+        Files in the Engine
       
     </span>
   </a>
@@ -901,17 +1167,6 @@
     <span class="md-ellipsis">
       
         Future Enhancements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        License
       
     </span>
   </a>
@@ -934,253 +1189,366 @@
                   
 
 
+  
+  
+
 
 <h1 id="async-node-execution-engine">Async Node Execution Engine</h1>
-<h2 id="overview">Overview</h2>
-<p>This implementation adds a complete async execution engine to flet_nodes, enabling pull-based evaluation of node graphs with the following features:</p>
+<h2 id="what-youll-learn-here">What You'll Learn Here</h2>
+<p>This document details the async execution engine powering Flet Node System. It covers:</p>
 <ul>
-<li><strong>Separate Runtime Layer</strong>: UI rendering and execution logic are fully decoupled</li>
-<li><strong>Async Pull-Based Evaluation</strong>: Nodes are executed recursively on-demand</li>
-<li><strong>Parallel Execution</strong>: Dependencies are evaluated in parallel using asyncio.gather</li>
-<li><strong>Result Caching</strong>: Executed nodes cache their results to avoid redundant computation</li>
-<li><strong>Graph Validation</strong>: Cycle detection and input validation before execution</li>
-<li><strong>Connection Tracking</strong>: Automatic synchronization of connections between Dart and Python</li>
-<li><strong>Modular Logic System</strong>: Node behavior is defined by pluggable logic classes</li>
+<li>How the three-layer architecture works in practice</li>
+<li>Pull-based recursive evaluation and concurrency</li>
+<li>Result caching and optimization</li>
+<li>Graph validation and error detection</li>
+<li>Connection synchronization between UI (Dart) and Runtime (Python)</li>
 </ul>
-<h2 id="architecture">Architecture</h2>
-<h3 id="layer-separation">Layer Separation</h3>
-<pre><code>┌─────────────────────────────────────┐
-│      UI Layer (Flutter + Flet)      │
-│  - Visual rendering                 │
-│  - User interaction                 │
-│  - Emits connection events          │
-└──────────────┬──────────────────────┘
-               │
-               │ Events (link_created, link_removed)
-               ▼
-┌─────────────────────────────────────┐
-│   Runtime Graph Layer (Python)      │
-│  - Node and connection storage      │
-│  - Independent of Flutter           │
-│  - Maintains execution state        │
-└──────────────┬──────────────────────┘
-               │
-               │ Graph access
-               ▼
-┌─────────────────────────────────────┐
-│   Execution Layer (Async Executor)  │
-│  - Pull-based evaluation            │
-│  - Parallel async execution         │
-│  - Result caching/memoization       │
-└─────────────────────────────────────┘
-</code></pre>
+<p><strong>TL;DR</strong>: The executor runs your node graph asynchronously, evaluates dependencies in parallel, and caches results to avoid redundant work.</p>
+<h2 id="core-features">Core Features</h2>
+<ul>
+<li>✅ <strong>Decoupled Runtime</strong>: UI and execution are independent (headless execution supported)</li>
+<li>✅ <strong>Async Pull-Based Evaluation</strong>: Nodes execute recursively on-demand, not pushed</li>
+<li>✅ <strong>Parallel Execution</strong>: Independent dependencies run concurrently with <code>asyncio.gather()</code></li>
+<li>✅ <strong>Smart Caching</strong>: Results stored per-session to avoid redundant computation</li>
+<li>✅ <strong>Graph Validation</strong>: Automatic cycle detection and input checking</li>
+<li>✅ <strong>Auto-Sync</strong>: Connections between Dart UI and Python runtime stay in sync</li>
+<li>✅ <strong>Modular Logic</strong>: New node types added by registering Python classes</li>
+</ul>
 <h2 id="core-components">Core Components</h2>
 <h3 id="1-runtime-graph-model-runtime_graphpy">1. Runtime Graph Model (<code>runtime_graph.py</code>)</h3>
-<p>Contains the execution-time data structures:</p>
+<p>In-memory representation of your graph:</p>
 <ul>
-<li><strong>RuntimeNode</strong>: Execution state, sockets, logic, and optional UI reference</li>
-<li><strong>InputSocket/OutputSocket</strong>: Data flow connectors with type information</li>
-<li><strong>Connection</strong>: Links between nodes (from_node.port → to_node.port)</li>
-<li><strong>Graph</strong>: Container for nodes and connections with validation</li>
+<li><strong>RuntimeNode</strong>: Computation unit with id, prototype, input/output sockets, cached outputs</li>
+<li><strong>InputSocket/OutputSocket</strong>: Typed data ports tracking connections to peer sockets</li>
+<li><strong>Connection</strong>: Directed edge from <code>(node_id, output_id)</code> → <code>(node_id, input_id)</code></li>
+<li><strong>RuntimeGraph</strong>: Container holding all nodes and connections</li>
 </ul>
+<p><strong>Key insight</strong>: Graph is pure Python—knows nothing about Flutter or Flet.</p>
 <h3 id="2-node-logic-system-node_logicpy">2. Node Logic System (<code>node_logic.py</code>)</h3>
-<p>Defines how nodes behave:</p>
+<p>Pluggable behavior for each node type:</p>
 <ul>
-<li><strong>BaseNodeLogic</strong>: Abstract base class for node execution</li>
-<li><strong>NodeLogicRegistry</strong>: Maps prototypes to logic implementations</li>
-<li><strong>register_node_logic()</strong>: Convenience function for registration</li>
+<li><strong>BaseNodeLogic</strong>: Abstract base class with async <code>execute(node, **inputs)</code> method</li>
+<li><strong>NodeLogicRegistry</strong>: Global registry mapping prototype IDs (e.g., <code>'math.add'</code>) to logic classes</li>
+<li><strong>register_node_logic(prototype_id, LogicClass)</strong>: Register a new node type</li>
 </ul>
+<p>When executor runs a node, it looks up the registered logic class and calls its <code>execute()</code> method.</p>
 <h3 id="3-async-executor-executorpy">3. Async Executor (<code>executor.py</code>)</h3>
-<p>Executes the graph:</p>
+<p>The execution engine:</p>
 <ul>
-<li><strong>AsyncGraphExecutor</strong>: Main execution engine</li>
-<li>Pull-based recursive evaluation</li>
-<li>Parallel dependency execution</li>
-<li>Result caching and state tracking</li>
+<li><strong>AsyncGraphExecutor</strong>: Main class that runs your graph</li>
+<li><code>execute(target_node_id)</code>: Execute target node (recursively evaluates dependencies)</li>
+<li><code>validate_graph()</code>: Check for cycles and missing required inputs</li>
+<li><code>clear_cache()</code>: Force fresh re-execution</li>
+<li><code>get_execution_order(node_id)</code>: Return execution order for debugging</li>
 </ul>
-<h3 id="4-nodesfield-integration-flet_nodespy">4. NodesField Integration (<code>flet_nodes.py</code>)</h3>
-<p>Connects everything:</p>
+<p>Execution is <strong>pull-based</strong>: executor walks backwards from target, pulling inputs from dependencies as needed.</p>
+<h3 id="4-integration-flet_nodespy">4. Integration (<code>flet_nodes.py</code>)</h3>
+<p>Bridges UI and runtime:</p>
 <ul>
-<li>Maintains runtime graph alongside UI nodes</li>
-<li>Handles link_created/link_removed events from Dart</li>
-<li>Provides <code>execute()</code> method for running nodes</li>
+<li><strong>NodesField</strong> maintains both UI state and RuntimeGraph in sync</li>
+<li>Listens for <code>link_created</code>/<code>link_removed</code> events from Dart</li>
 <li>Auto-creates RuntimeNodes when UI nodes are added</li>
+<li>Provides <code>execute()</code> method for users to trigger execution</li>
+<li>Handles error reporting back to UI</li>
 </ul>
-<h2 id="usage">Usage</h2>
-<h3 id="1-register-node-logic">1. Register Node Logic</h3>
-<p>Define how your nodes execute:</p>
+<h2 id="step-by-step-register-create-execute">Step-by-Step: Register → Create → Execute</h2>
+<h3 id="step-1-register-node-logic">Step 1: Register Node Logic</h3>
+<p>Define what your node does:</p>
 <pre><code class="language-python">from flet_nodes import BaseNodeLogic, register_node_logic
 
 class AddNodeLogic(BaseNodeLogic):
+    &quot;&quot;&quot;Adds two numbers.&quot;&quot;&quot;
     async def execute(self, node, **inputs):
         a = inputs.get('a', 0)
         b = inputs.get('b', 0)
         return {'result': a + b}
 
-# Register with prototype
+# Register with prototype ID
 register_node_logic('math.add', AddNodeLogic)
 </code></pre>
-<h3 id="2-create-nodes">2. Create Nodes</h3>
+<p><strong>Key points</strong>:</p>
+<ul>
+<li>Inherit from <code>BaseNodeLogic</code></li>
+<li>Implement async <code>execute(node, **inputs)</code></li>
+<li>Return dict with output socket IDs as keys</li>
+<li>Register with unique prototype ID (e.g., domain.operation)</li>
+</ul>
+<h3 id="step-2-create-nodes-in-ui">Step 2: Create Nodes in UI</h3>
 <pre><code class="language-python">from flet_nodes import NodesField, InputSpec, OutputSpec
 
 nodes_field = NodesField(expand=True)
 
 await nodes_field.add_node(
-    prototype='math.add',
-    x=100, y=100,
-    name='Add',
+    prototype='math.add',      # Must match registered ID
+    x=100, y=100,              # Canvas position
+    name='Add Numbers',        # Display name
     inputs=[
-        InputSpec(id='a', displayName='A', type='double', default=0.0),
-        InputSpec(id='b', displayName='B', type='double', default=0.0)
+        InputSpec(id='a', displayName='Number A', type='double', default=0.0),
+        InputSpec(id='b', displayName='Number B', type='double', default=0.0)
     ],
     outputs=[
-        OutputSpec(id='result', displayName='Result', type='double')
+        OutputSpec(id='result', displayName='Sum', type='double')
     ]
 )
 </code></pre>
-<h3 id="3-execute-nodes">3. Execute Nodes</h3>
-<p>After connecting nodes in the UI:</p>
-<pre><code class="language-python"># Execute a specific node (automatically evaluates dependencies)
+<h3 id="step-3-execute-from-python">Step 3: Execute from Python</h3>
+<p>After user connects nodes:</p>
+<pre><code class="language-python"># Execute a target node (auto-evaluates dependencies)
 result = await nodes_field.execute('node_id')
 print(result)  # {'result': 42}
 
-# Validate graph before execution
+# Check graph validity first
 is_valid, error = nodes_field.validate_graph()
-if is_valid:
-    result = await nodes_field.execute('node_id', clear_cache=True)
-</code></pre>
-<h3 id="4-access-ui-content-in-logic">4. Access UI Content in Logic</h3>
-<p>Nodes can read from their UI controls:</p>
-<pre><code class="language-python">class TextNodeLogic(BaseNodeLogic):
-    async def execute(self, node, **inputs):
-        # Access UI control
-        if isinstance(node.ui_content, ft.TextField):
-            value = node.ui_content.value
-            return {'output': value}
+if not is_valid:
+    print(f&quot;Graph error: {error}&quot;)
 
-        # Fallback to input
-        return {'output': inputs.get('input', '')}
-</code></pre>
-<h2 id="example-logic-implementations">Example Logic Implementations</h2>
-<p>The package includes several example implementations in <code>example_logic.py</code>:</p>
-<ul>
-<li><strong>SimpleValueLogic</strong>: Reads from TextField or passes through input</li>
-<li><strong>BoolNodeLogic</strong>: Boolean value node with Checkbox support</li>
-<li><strong>IfElseLogic</strong>: Conditional branching</li>
-<li><strong>MathAddLogic</strong>: Add two numbers</li>
-<li><strong>MathMultiplyLogic</strong>: Multiply two numbers</li>
-<li><strong>PrintLogic</strong>: Debug output node</li>
-</ul>
-<p>Register all examples:</p>
-<pre><code class="language-python">from flet_nodes import register_all_example_logic
-
-register_all_example_logic()
-</code></pre>
-<h2 id="execution-flow">Execution Flow</h2>
-<ol>
-<li><strong>User triggers execution</strong> on a target node</li>
-<li><strong>Graph validation</strong> checks for cycles and invalid connections</li>
-<li><strong>Recursive pull</strong>: Executor walks backwards from target</li>
-<li><strong>Parallel evaluation</strong>: Dependencies execute concurrently</li>
-<li><strong>Input gathering</strong>: Values collected from connected outputs</li>
-<li><strong>Logic execution</strong>: Node's <code>execute()</code> method runs</li>
-<li><strong>Result caching</strong>: Output stored to avoid recomputation</li>
-<li><strong>Return</strong>: Final result bubbles back to caller</li>
-</ol>
-<h2 id="connection-synchronization">Connection Synchronization</h2>
-<p>Dart emits events when users create/remove connections:</p>
-<pre><code class="language-python"># Automatic - handled internally
-NodesField.on_link_created  → updates Graph.connections
-NodesField.on_link_removed  → removes from Graph.connections
-</code></pre>
-<p>The runtime graph stays synchronized with UI connections automatically.</p>
-<h2 id="advanced-features">Advanced Features</h2>
-<h3 id="custom-logic-validation">Custom Logic Validation</h3>
-<pre><code class="language-python">class ValidatedLogic(BaseNodeLogic):
-    async def validate_inputs(self, node, **inputs):
-        if inputs.get('value', 0) &lt; 0:
-            return False, &quot;Value must be positive&quot;
-        return True, None
-
-    async def execute(self, node, **inputs):
-        return {'output': inputs['value'] * 2}
-</code></pre>
-<h3 id="lifecycle-callbacks">Lifecycle Callbacks</h3>
-<pre><code class="language-python">class LifecycleLogic(BaseNodeLogic):
-    def on_node_created(self, node):
-        print(f&quot;Node {node.id} created&quot;)
-
-    def on_node_removed(self, node):
-        print(f&quot;Node {node.id} removed&quot;)
-
-    async def execute(self, node, **inputs):
-        return {'output': 42}
-</code></pre>
-<h3 id="execution-order-analysis">Execution Order Analysis</h3>
-<pre><code class="language-python">executor = AsyncGraphExecutor(nodes_field.get_graph())
-order = executor.get_execution_order('target_node_id')
-print(f&quot;Will execute in order: {order}&quot;)
-</code></pre>
-<h3 id="selective-cache-clearing">Selective Cache Clearing</h3>
-<pre><code class="language-python"># Clear cache for a node and all dependents
-executor.clear_downstream_cache('node_id')
-
-# Execute with fresh cache
+# Force fresh execution (clear cache)
 result = await nodes_field.execute('node_id', clear_cache=True)
 </code></pre>
+<h2 id="accessing-ui-content-in-logic">Accessing UI Content in Logic</h2>
+<p>Nodes can read from UI controls as input fallbacks:</p>
+<pre><code class="language-python">import flet as ft
+from flet_nodes import BaseNodeLogic
+
+class TextInputLogic(BaseNodeLogic):
+    async def execute(self, node, **inputs):
+        # Read from UI control if it exists
+        if node.ui_content and isinstance(node.ui_content, ft.TextField):
+            value = node.ui_content.value
+        else:
+            # Fallback to connected input
+            value = inputs.get('input', '')
+
+        return {'output': value.upper()}
+</code></pre>
+<h2 id="how-execution-works">How Execution Works</h2>
+<h3 id="the-pull-based-algorithm">The Pull-Based Algorithm</h3>
+<p>When you call <code>executor.execute('target_node_id')</code>:</p>
+<ol>
+<li><strong>Validate</strong>: Check graph for cycles and required inputs</li>
+<li><strong>Recursive walk</strong>: Start at target node</li>
+<li><strong>Check inputs</strong>: For each input socket:</li>
+<li>If connected: recursively execute upstream node (unless cached)</li>
+<li>If not connected: use default value or UI content</li>
+<li><strong>Execute node</strong>: Call the logic class's <code>execute()</code> method</li>
+<li><strong>Cache result</strong>: Store output in node's cache</li>
+<li><strong>Return</strong>: Pass outputs to downstream nodes (or to caller)</li>
+</ol>
+<h4 id="example-walkthrough">Example Walkthrough</h4>
+<p>Graph: <code>A → B → C</code></p>
+<pre><code>execute('C')
+├─ validate_graph()
+├─ C.inputs['x'] is connected to B.output
+│  └─ execute('B')  # Recursive
+│     ├─ B.inputs['y'] is connected to A.output
+│     │  └─ execute('A')  # Recursive
+│     │     ├─ A.inputs are not connected
+│     │     ├─ Use defaults
+│     │     ├─ Call A's logic → result = 10
+│     │     └─ Cache in A.cached_outputs
+│     ├─ Get A's result from cache
+│     ├─ Call B's logic with A.result → result = 20
+│     └─ Cache in B.cached_outputs
+├─ Get B's result from cache
+├─ Call C's logic with B.result → result = 30
+├─ Cache in C.cached_outputs
+└─ Return result to caller
+</code></pre>
+<h3 id="concurrency-with-asynciogather">Concurrency with asyncio.gather()</h3>
+<p>When multiple nodes are independent, they execute in parallel:</p>
+<pre><code>execute('C')
+├─ C needs X from B and Y from A₁ and A₂
+│  ├─ execute('B') → parallel
+│  │  └─ execute('A₁') ← parallel
+│  │  └─ execute('A₂') ← parallel
+│  └─ [asyncio.gather(all three)]
+├─ Wait for all to complete
+├─ Call C's logic with all inputs
+└─ Return result
+</code></pre>
+<p>This means independent branches run <strong>at the same time</strong>, speeding up complex graphs.</p>
+<h3 id="caching-avoid-redundant-work">Caching: Avoid Redundant Work</h3>
+<p>Once a node executes, its outputs are cached <strong>within one execution session</strong>:</p>
+<pre><code class="language-python"># Same execute() call tree reuses cache
+result = await executor.execute('C')
+# If C calls B which calls A, and later B calls A again,
+# A's cached result is reused—not executed twice
+
+# Clear cache to force fresh execution
+await executor.clear_cache()
+result = await executor.execute('C')  # Now A runs again
+</code></pre>
+<p>This is powerful for expensive operations (API calls, file I/O, computations).</p>
+<h2 id="advanced-techniques">Advanced Techniques</h2>
+<h3 id="input-validation-in-logic">Input Validation in Logic</h3>
+<pre><code class="language-python">class ValidatedLogic(BaseNodeLogic):
+    async def execute(self, node, **inputs):
+        value = inputs.get('value', 0)
+        if value &lt; 0:
+            raise ValueError(&quot;Value must be positive&quot;)
+        return {'output': value * 2}
+</code></pre>
+<p>Raising exceptions in logic aborts execution and reports error to user.</p>
+<h3 id="execution-order-inspection">Execution Order Inspection</h3>
+<pre><code class="language-python">executor = AsyncGraphExecutor(nodes_field.get_graph())
+order = executor.get_execution_order('target_node_id')
+print(order)  # ['node_a', 'node_b', 'node_c']
+</code></pre>
+<p>Useful for debugging complex graphs.</p>
+<h3 id="async-operations-in-logic">Async Operations in Logic</h3>
+<pre><code class="language-python">import asyncio
+
+class HTTPLogic(BaseNodeLogic):
+    async def execute(self, node, **inputs):
+        url = inputs.get('url', '')
+        # Can use await since execute() is async!
+        response = await fetch_url_async(url)  
+        return {'response': response.text}
+</code></pre>
+<p>Your node logic can do async I/O—perfect for APIs, database queries, etc.</p>
+<h3 id="selective-cache-clearing">Selective Cache Clearing</h3>
+<pre><code class="language-python"># Execute with fresh cache (ignore previous results)
+result = await nodes_field.execute('node_id', clear_cache=True)
+
+# Or manually clear
+executor.clear_cache()
+</code></pre>
 <h2 id="error-handling">Error Handling</h2>
+<p>The executor detects three main problems:</p>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cause</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CyclicDependencyError</code></td>
+<td>Graph has a cycle (A→B→A)</td>
+<td>Remove a connection to break cycle</td>
+</tr>
+<tr>
+<td><code>MissingRequiredInputError</code></td>
+<td>Input not connected and no default value</td>
+<td>Connect the port or set a default</td>
+</tr>
+<tr>
+<td><code>ExecutionError</code></td>
+<td>Logic method raised an exception</td>
+<td>Check your logic code and input values</td>
+</tr>
+</tbody>
+</table>
+<p>Example error handling:</p>
 <pre><code class="language-python">from flet_nodes import ExecutionError, CyclicDependencyError
 
 try:
     result = await nodes_field.execute('node_id')
 except CyclicDependencyError as e:
-    print(f&quot;Graph contains cycle: {e}&quot;)
+    print(f&quot;Graph has a cycle: {e}&quot;)
 except ExecutionError as e:
-    print(f&quot;Execution failed: {e}&quot;)
+    print(f&quot;Node failed: {e}&quot;)
 </code></pre>
-<h2 id="testing">Testing</h2>
-<p>Run the example:</p>
-<pre><code class="language-bash">cd examples/flet_nodes_example
+<p>All errors include:</p>
+<ul>
+<li>Node ID where error occurred</li>
+<li>Human-readable message</li>
+<li>Full traceback for debugging</li>
+</ul>
+<h2 id="testing-node-logic">Testing Node Logic</h2>
+<h3 id="unit-test-example">Unit Test Example</h3>
+<pre><code class="language-python">import pytest
+from flet_nodes import RuntimeNode, BaseNodeLogic
+
+class TestAddLogic:
+    def setup_method(self):
+        from flet_nodes import BaseNodeLogic
+
+        class AddLogic(BaseNodeLogic):
+            async def execute(self, node, **inputs):
+                return {'result': inputs.get('a', 0) + inputs.get('b', 0)}
+
+        self.logic = AddLogic()
+
+    @pytest.mark.asyncio
+    async def test_add_numbers(self):
+        node = RuntimeNode(id='test', prototype='math.add')
+        result = await self.logic.execute(node, a=5, b=3)
+        assert result['result'] == 8
+</code></pre>
+<h3 id="integration-test-full-graph">Integration Test: Full Graph</h3>
+<pre><code class="language-bash"># Run the demo app
+cd examples/flet_nodes_example
 uv run --active flet -r src/main.py
 </code></pre>
+<p>Then:</p>
 <ol>
-<li>Click "Register Types" to register basic types</li>
+<li>Click "Register Types" to load example logic</li>
 <li>Click "Demo Nodes" to create example nodes</li>
-<li>Connect nodes by dragging from output → input ports</li>
-<li>Select a node</li>
-<li>Click "Execute Selected" to run it</li>
+<li>Connect nodes by dragging ports</li>
+<li>Click "Execute Selected" to run the graph</li>
+<li>Check console for output</li>
 </ol>
-<h2 id="design-principles">Design Principles</h2>
-<p>✅ <strong>UI stays presentation-only</strong> - No execution logic in Flutter
-✅ <strong>Runtime is framework-independent</strong> - Can run headless
-✅ <strong>Executor doesn't depend on Flutter</strong> - Pure Python async
-✅ <strong>Logic is modular</strong> - Easy to add new node types
-✅ <strong>Graph supports headless execution</strong> - Can run without UI</p>
-<h2 id="files-created">Files Created</h2>
+<h2 id="design-philosophy">Design Philosophy</h2>
+<p>The engine is built around these principles:</p>
+<p>✅ <strong>Separation of Concerns</strong></p>
 <ul>
-<li><code>src/flet_nodes/runtime_graph.py</code> - Core graph data structures</li>
-<li><code>src/flet_nodes/node_logic.py</code> - Logic system and registry</li>
-<li><code>src/flet_nodes/executor.py</code> - Async execution engine</li>
-<li><code>src/flet_nodes/example_logic.py</code> - Example implementations</li>
-<li>Updated <code>src/flet_nodes/flet_nodes.py</code> - Integration</li>
-<li>Updated <code>src/flutter/flet_nodes/lib/src/NodesField.dart</code> - Connection events</li>
-<li>Updated <code>examples/flet_nodes_example/src/main.py</code> - Demo</li>
+<li>UI stays in Flutter (rendering, events)</li>
+<li>Logic lives in Python (computation)</li>
+<li>No execution code touches Dart</li>
 </ul>
+<p>✅ <strong>Headless Execution</strong></p>
+<ul>
+<li>Executor doesn't depend on Flutter/Flet</li>
+<li>Run graphs on servers, workers, or in tests</li>
+<li>Pure Python asyncio—portable and scalable</li>
+</ul>
+<p>✅ <strong>Extensibility</strong></p>
+<ul>
+<li>Add new node types by registering logic classes</li>
+<li>No UI changes needed</li>
+<li>Each node type is a simple Python class</li>
+</ul>
+<p>✅ <strong>Performance</strong></p>
+<ul>
+<li>Parallel execution for independent branches</li>
+<li>Aggressive caching to avoid redundant work</li>
+<li>Lazy evaluation (pull-based, not push-based)</li>
+</ul>
+<p>✅ <strong>Reliability</strong></p>
+<ul>
+<li>Graph validation before execution</li>
+<li>Clear error messages with full context</li>
+<li>Type hints and structured data</li>
+</ul>
+<h2 id="files-in-the-engine">Files in the Engine</h2>
+<p>Key files in the implementation:</p>
+<ul>
+<li><code>src/flet_nodes/runtime_graph.py</code> → Graph data structures (nodes, connections)</li>
+<li><code>src/flet_nodes/node_logic.py</code> → Logic base class and registry</li>
+<li><code>src/flet_nodes/executor.py</code> → Execution algorithm (pull-based evaluation)</li>
+<li><code>src/flet_nodes/flet_nodes.py</code> → UI ↔ Runtime integration</li>
+<li><code>src/flet_nodes/example_logic.py</code> → Example node implementations (Add, Multiply, etc.)</li>
+<li><code>src/flutter/flet_nodes/lib/src/NodesField.dart</code> → Dart UI component</li>
+<li><code>examples/flet_nodes_example/src/main.py</code> → Demo app using the engine</li>
+</ul>
+<p>For more on how to extend, see <a href="../development/">Development</a>.</p>
 <h2 id="future-enhancements">Future Enhancements</h2>
-<p>Possible extensions:</p>
+<p>Possible extensions to the engine:</p>
 <ul>
-<li>[ ] Persist graph to JSON/file</li>
-<li>[ ] Undo/redo for graph modifications</li>
-<li>[ ] Execution visualization (animated flow)</li>
-<li>[ ] Breakpoints and step-through debugging</li>
-<li>[ ] Performance profiling per node</li>
-<li>[ ] Distributed execution across multiple processes</li>
-<li>[ ] Type checking at connection time</li>
-<li>[ ] Auto-save execution results</li>
-<li>[ ] Graph diff and merge</li>
+<li>[ ] <strong>Persist graphs to JSON/YAML</strong>: Save and load graphs from files</li>
+<li>[ ] <strong>Type checking at connection time</strong>: Warn when incompatible types connect</li>
+<li>[ ] <strong>Execution visualization</strong>: Animate data flow through nodes</li>
+<li>[ ] <strong>Breakpoints and debugging</strong>: Step through node execution</li>
+<li>[ ] <strong>Performance profiling</strong>: Measure execution time per node</li>
+<li>[ ] <strong>Distributed execution</strong>: Run subgraphs on different machines</li>
+<li>[ ] <strong>Undo/redo</strong>: Track and reverse graph modifications</li>
+<li>[ ] <strong>Auto-save execution results</strong>: Cache results to disk</li>
+<li>[ ] <strong>Graph diff and merge</strong>: Compare versions or merge branches</li>
 </ul>
-<h2 id="license">License</h2>
-<p>Same as flet_nodes parent project.</p>
+<p>Contributions welcome! See <a href="../development/">Development</a> for guidelines.</p>
 
 
 
@@ -1230,7 +1598,7 @@ uv run --active flet -r src/main.py
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

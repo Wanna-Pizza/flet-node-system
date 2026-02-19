@@ -13,8 +13,10 @@
       
       
       
-        <link rel="prev" href="../engine/">
+        <link rel="prev" href="../architecture/">
       
+      
+        <link rel="next" href="../engine/">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>Building - Flet Node System</title>
+        <title>Examples - Flet Node System</title>
       
     
     
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#building-and-running" class="md-skip">
+        <a href="#examples" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Building
+              Examples
             
           </span>
         </div>
@@ -311,10 +313,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../examples/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -330,6 +359,159 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-demo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Demo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick Demo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run It
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-youll-see" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You'll See
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-example-includes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Example Includes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-input-node-with-ui-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Input Node with UI Fallback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-processing-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Processing Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-conditional-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Conditional Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-node-with-side-effects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Node with Side Effects
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips-for-building-graphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips for Building Graphs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -365,37 +547,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Building
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../building/" class="md-nav__link">
         
   
   
@@ -411,148 +566,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick Start
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Quick Start">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prerequisites
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run-the-demo-app" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Run the Demo App
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#demo-walkthrough" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Demo Walkthrough
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#development-workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Development Workflow
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Development Workflow">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#view-documentation-locally" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        View Documentation Locally
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run-unit-tests" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Run Unit Tests
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#debug-tips" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Debug Tips
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Project Structure
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-artifacts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build Artifacts
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -584,22 +597,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#quick-demo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick Start
+        Quick Demo
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Quick Start">
+    <nav class="md-nav" aria-label="Quick Demo">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#run-it" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Run It
       
     </span>
   </a>
@@ -607,10 +620,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-the-demo-app" class="md-nav__link">
+  <a href="#what-youll-see" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Run the Demo App
+        What You'll See
       
     </span>
   </a>
@@ -618,10 +631,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#demo-walkthrough" class="md-nav__link">
+  <a href="#what-the-example-includes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Demo Walkthrough
+        What the Example Includes
       
     </span>
   </a>
@@ -634,22 +647,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#development-workflow" class="md-nav__link">
+  <a href="#common-patterns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Development Workflow
+        Common Patterns
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Development Workflow">
+    <nav class="md-nav" aria-label="Common Patterns">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#view-documentation-locally" class="md-nav__link">
+  <a href="#1-input-node-with-ui-fallback" class="md-nav__link">
     <span class="md-ellipsis">
       
-        View Documentation Locally
+        1. Input Node with UI Fallback
       
     </span>
   </a>
@@ -657,10 +670,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-unit-tests" class="md-nav__link">
+  <a href="#2-processing-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Run Unit Tests
+        2. Processing Pipeline
       
     </span>
   </a>
@@ -668,10 +681,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#debug-tips" class="md-nav__link">
+  <a href="#3-conditional-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Debug Tips
+        3. Conditional Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-node-with-side-effects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Node with Side Effects
       
     </span>
   </a>
@@ -684,10 +708,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-structure" class="md-nav__link">
+  <a href="#tips-for-building-graphs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Project Structure
+        Tips for Building Graphs
       
     </span>
   </a>
@@ -695,10 +719,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#build-artifacts" class="md-nav__link">
+  <a href="#example-files" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Build Artifacts
+        Example Files
       
     </span>
   </a>
@@ -725,62 +749,98 @@
   
 
 
-<h1 id="building-and-running">Building and Running</h1>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="prerequisites">Prerequisites</h3>
-<ul>
-<li>Python ≥ 3.10</li>
-<li><code>uv</code> package manager (or <code>pip</code>)</li>
-</ul>
-<h3 id="run-the-demo-app">Run the Demo App</h3>
+<h1 id="examples">Examples</h1>
+<h2 id="quick-demo">Quick Demo</h2>
+<h3 id="run-it">Run It</h3>
 <pre><code class="language-bash">cd examples/flet_nodes_example
 uv run --active flet -r src/main.py
 </code></pre>
-<p>This launches a Flet app with an embedded node editor.</p>
-<h3 id="demo-walkthrough">Demo Walkthrough</h3>
+<h3 id="what-youll-see">What You'll See</h3>
 <ol>
-<li><strong>Register Types</strong>: Click the button to register example node logic classes</li>
-<li><strong>Create Nodes</strong>: Click "Demo Nodes" to spawn example nodes (Add, Multiply, etc.)</li>
-<li><strong>Connect Ports</strong>: Drag from output ports to input ports to form a dataflow</li>
-<li><strong>Execute</strong>: Select a node and click "Execute Selected" to run the graph</li>
-<li><strong>Observe</strong>: Check console output or node results</li>
+<li><strong>Register Types</strong> button → loads example node logic</li>
+<li><strong>Demo Nodes</strong> button → creates nodes on the canvas</li>
+<li>A node editor with draggable nodes and connectable ports</li>
+<li><strong>Execute Selected</strong> button → runs the graph</li>
 </ol>
-<h2 id="development-workflow">Development Workflow</h2>
-<h3 id="view-documentation-locally">View Documentation Locally</h3>
-<pre><code class="language-bash">mkdocs serve
+<h3 id="what-the-example-includes">What the Example Includes</h3>
+<table>
+<thead>
+<tr>
+<th>Node Type</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value A, Value B</td>
+<td>Input nodes with text fields</td>
+</tr>
+<tr>
+<td>Add</td>
+<td>Adds two numbers</td>
+</tr>
+<tr>
+<td>Multiply</td>
+<td>Multiplies two numbers</td>
+</tr>
+<tr>
+<td>Print</td>
+<td>Outputs to console</td>
+</tr>
+<tr>
+<td>If/Else</td>
+<td>Conditional branching</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-patterns">Common Patterns</h2>
+<h3 id="1-input-node-with-ui-fallback">1. Input Node with UI Fallback</h3>
+<pre><code class="language-python">class InputLogic(BaseNodeLogic):
+    async def execute(self, node, **inputs):
+        # Use UI textfield if no connected input
+        if node.ui_content and hasattr(node.ui_content, 'value'):
+            return {'value': node.ui_content.value}
+        return {'value': inputs.get('default', '')}
 </code></pre>
-<p>Then open <code>http://localhost:8000</code> in your browser. Auto-reloads when you edit <code>.md</code> files.</p>
-<h3 id="run-unit-tests">Run Unit Tests</h3>
-<pre><code class="language-bash">python3 test_execution_engine.py
+<h3 id="2-processing-pipeline">2. Processing Pipeline</h3>
+<pre><code>[Input A] ──→ [Add] ──→ [Multiply] ──→ [Print]
+[Input B] ──→ [  +  ]                
 </code></pre>
-<p>Or with pytest (if installed):</p>
-<pre><code class="language-bash">pytest src/flet_nodes/ -v
+<p>Connect ports to wire data through the pipeline, then execute the final node.</p>
+<h3 id="3-conditional-logic">3. Conditional Logic</h3>
+<pre><code class="language-python">class IfElseLogic(BaseNodeLogic):
+    async def execute(self, node, **inputs):
+        condition = bool(inputs.get('condition', False))
+        if condition:
+            return {'result': inputs.get('true_val', None)}
+        else:
+            return {'result': inputs.get('false_val', None)}
 </code></pre>
-<h3 id="debug-tips">Debug Tips</h3>
-<ul>
-<li><strong>Execution not working?</strong> Add <code>print()</code> statements in <code>executor.py</code> to trace execution flow</li>
-<li><strong>Custom node not appearing?</strong> Ensure you called <code>register_node_logic()</code> before clicking "Register Types"</li>
-<li><strong>UI changes not showing?</strong> Restart the app—Flet requires relaunch to pick up Python code changes</li>
-<li><strong>Enable logging</strong>:
-  <code>python
-  import logging
-  logging.basicConfig(level=logging.DEBUG)</code></li>
-</ul>
-<h2 id="project-structure">Project Structure</h2>
-<pre><code>flet_nodes/
-├── runtime_graph.py      # Graph model and node storage
-├── node_logic.py         # Base classes and registry
-├── executor.py           # Async execution engine
-├── flet_nodes.py         # UI ↔ runtime bridge
-├── example_logic.py      # Demo node implementations
-└── __init__.py           # Public API
+<h3 id="4-node-with-side-effects">4. Node with Side Effects</h3>
+<pre><code class="language-python">class SaveToFileLogic(BaseNodeLogic):
+    async def execute(self, node, **inputs):
+        data = inputs.get('data', '')
+        filepath = inputs.get('path', 'output.txt')
 
-examples/flet_nodes_example/
-├── src/main.py           # Demo app entry point
-└── flutter/              # Flutter (Dart) frontend code
+        with open(filepath, 'w') as f:
+            f.write(str(data))
+
+        return {'status': 'saved'}
 </code></pre>
-<h2 id="build-artifacts">Build Artifacts</h2>
-<p>The repo includes example macOS builds in <code>build/</code> and <code>examples/flet_nodes_example/build/</code>. These are <strong>not required</strong> to run the engine—they're just reference outputs.</p>
+<h2 id="tips-for-building-graphs">Tips for Building Graphs</h2>
+<ul>
+<li><strong>Start simple</strong>: Create a few nodes, connect them, execute to see flow</li>
+<li><strong>Debug with Print</strong>: Insert <code>PrintLogic</code> nodes to inspect intermediate values</li>
+<li><strong>Check types</strong>: Ensure output types match input expectations</li>
+<li><strong>Avoid cycles</strong>: The engine detects them, but graphs won't execute</li>
+<li><strong>Test independently</strong>: Unit-test logic classes before using them in graphs</li>
+</ul>
+<h2 id="example-files">Example Files</h2>
+<ul>
+<li><code>examples/flet_nodes_example/src/main.py</code> — Demo UI app</li>
+<li><code>src/flet_nodes/example_logic.py</code> — Logic implementations (Add, Multiply, Print, etc.)</li>
+<li><code>test_execution_engine.py</code> — Unit test examples</li>
+</ul>
 
 
 
