@@ -2,6 +2,9 @@
 
 **A visual node editor + async Python runtime for dataflow-based applications.**
 
+<img width="1824" height="1175" alt="image" src="https://github.com/user-attachments/assets/25b85e7c-d844-42ef-9db1-1d28a65f1acf" />
+
+
 This repository provides a complete system for building visual node-based editors in Flet, paired with a headless Python runtime that executes node graphs asynchronously.
 
 ## Quick Overview
