@@ -1,0 +1,35 @@
+[project]
+name = "flet-nodes"
+version = "0.1.0"
+description = "FletNodes control for Flet"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Flet contributors", email = "you@example.com" }
+]
+dependencies = [
+    "flet[all]==0.80.5",
+]
+
+[dependency-groups]
+dev = [
+    "mkdocs", 
+    "mkdocs-material",
+    "mkdocstrings[python]"
+]
+
+[project.urls]
+Homepage = "https://mydomain.dev"
+Documentation = "https://github.com/MyGithubAccount/flet-nodes"
+Repository = "https://github.com/MyGithubAccount/flet-nodes"
+Issues = "https://github.com/MyGithubAccount/flet-nodes/issues"
+
+[tool.setuptools.package-data]
+"flutter.flet_nodes" = ["**/*"]
+
+[tool.setuptools]
+license-files = []
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
