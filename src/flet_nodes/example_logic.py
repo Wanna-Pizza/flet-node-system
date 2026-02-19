@@ -10,7 +10,7 @@ import flet as ft
 from .node_logic import BaseNodeLogic
 from .runtime_graph import RuntimeNode
 
-
+#flow based
 class StringValueLogic(BaseNodeLogic):
     """
     Logic for 'string.value' node prototype.
