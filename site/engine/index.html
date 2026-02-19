@@ -1,0 +1,1240 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Engine - FletNodes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#async-node-execution-engine" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="FletNodes" class="md-header__button md-logo" aria-label="FletNodes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FletNodes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Engine
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="FletNodes" class="md-nav__button md-logo" aria-label="FletNodes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FletNodes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#layer-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer Separation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-runtime-graph-model-runtime_graphpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Runtime Graph Model (runtime_graph.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-node-logic-system-node_logicpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Node Logic System (node_logic.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-async-executor-executorpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Async Executor (executor.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-nodesfield-integration-flet_nodespy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. NodesField Integration (flet_nodes.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-register-node-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Register Node Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-execute-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Execute Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-access-ui-content-in-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Access UI Content in Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-logic-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Logic Implementations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connection-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Synchronization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-logic-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Logic Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifecycle-callbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle Callbacks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution-order-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution Order Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selective-cache-clearing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selective Cache Clearing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files Created
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Enhancements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        License
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#layer-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer Separation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-runtime-graph-model-runtime_graphpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Runtime Graph Model (runtime_graph.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-node-logic-system-node_logicpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Node Logic System (node_logic.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-async-executor-executorpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Async Executor (executor.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-nodesfield-integration-flet_nodespy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. NodesField Integration (flet_nodes.py)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-register-node-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Register Node Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-execute-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Execute Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-access-ui-content-in-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Access UI Content in Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-logic-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Logic Implementations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connection-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Synchronization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-logic-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Logic Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lifecycle-callbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle Callbacks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution-order-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution Order Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selective-cache-clearing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selective Cache Clearing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files Created
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Enhancements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        License
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="async-node-execution-engine">Async Node Execution Engine</h1>
+<h2 id="overview">Overview</h2>
+<p>This implementation adds a complete async execution engine to flet_nodes, enabling pull-based evaluation of node graphs with the following features:</p>
+<ul>
+<li><strong>Separate Runtime Layer</strong>: UI rendering and execution logic are fully decoupled</li>
+<li><strong>Async Pull-Based Evaluation</strong>: Nodes are executed recursively on-demand</li>
+<li><strong>Parallel Execution</strong>: Dependencies are evaluated in parallel using asyncio.gather</li>
+<li><strong>Result Caching</strong>: Executed nodes cache their results to avoid redundant computation</li>
+<li><strong>Graph Validation</strong>: Cycle detection and input validation before execution</li>
+<li><strong>Connection Tracking</strong>: Automatic synchronization of connections between Dart and Python</li>
+<li><strong>Modular Logic System</strong>: Node behavior is defined by pluggable logic classes</li>
+</ul>
+<h2 id="architecture">Architecture</h2>
+<h3 id="layer-separation">Layer Separation</h3>
+<pre><code>┌─────────────────────────────────────┐
+│      UI Layer (Flutter + Flet)      │
+│  - Visual rendering                 │
+│  - User interaction                 │
+│  - Emits connection events          │
+└──────────────┬──────────────────────┘
+               │
+               │ Events (link_created, link_removed)
+               ▼
+┌─────────────────────────────────────┐
+│   Runtime Graph Layer (Python)      │
+│  - Node and connection storage      │
+│  - Independent of Flutter           │
+│  - Maintains execution state        │
+└──────────────┬──────────────────────┘
+               │
+               │ Graph access
+               ▼
+┌─────────────────────────────────────┐
+│   Execution Layer (Async Executor)  │
+│  - Pull-based evaluation            │
+│  - Parallel async execution         │
+│  - Result caching/memoization       │
+└─────────────────────────────────────┘
+</code></pre>
+<h2 id="core-components">Core Components</h2>
+<h3 id="1-runtime-graph-model-runtime_graphpy">1. Runtime Graph Model (<code>runtime_graph.py</code>)</h3>
+<p>Contains the execution-time data structures:</p>
+<ul>
+<li><strong>RuntimeNode</strong>: Execution state, sockets, logic, and optional UI reference</li>
+<li><strong>InputSocket/OutputSocket</strong>: Data flow connectors with type information</li>
+<li><strong>Connection</strong>: Links between nodes (from_node.port → to_node.port)</li>
+<li><strong>Graph</strong>: Container for nodes and connections with validation</li>
+</ul>
+<h3 id="2-node-logic-system-node_logicpy">2. Node Logic System (<code>node_logic.py</code>)</h3>
+<p>Defines how nodes behave:</p>
+<ul>
+<li><strong>BaseNodeLogic</strong>: Abstract base class for node execution</li>
+<li><strong>NodeLogicRegistry</strong>: Maps prototypes to logic implementations</li>
+<li><strong>register_node_logic()</strong>: Convenience function for registration</li>
+</ul>
+<h3 id="3-async-executor-executorpy">3. Async Executor (<code>executor.py</code>)</h3>
+<p>Executes the graph:</p>
+<ul>
+<li><strong>AsyncGraphExecutor</strong>: Main execution engine</li>
+<li>Pull-based recursive evaluation</li>
+<li>Parallel dependency execution</li>
+<li>Result caching and state tracking</li>
+</ul>
+<h3 id="4-nodesfield-integration-flet_nodespy">4. NodesField Integration (<code>flet_nodes.py</code>)</h3>
+<p>Connects everything:</p>
+<ul>
+<li>Maintains runtime graph alongside UI nodes</li>
+<li>Handles link_created/link_removed events from Dart</li>
+<li>Provides <code>execute()</code> method for running nodes</li>
+<li>Auto-creates RuntimeNodes when UI nodes are added</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<h3 id="1-register-node-logic">1. Register Node Logic</h3>
+<p>Define how your nodes execute:</p>
+<pre><code class="language-python">from flet_nodes import BaseNodeLogic, register_node_logic
+
+class AddNodeLogic(BaseNodeLogic):
+    async def execute(self, node, **inputs):
+        a = inputs.get('a', 0)
+        b = inputs.get('b', 0)
+        return {'result': a + b}
+
+# Register with prototype
+register_node_logic('math.add', AddNodeLogic)
+</code></pre>
+<h3 id="2-create-nodes">2. Create Nodes</h3>
+<pre><code class="language-python">from flet_nodes import NodesField, InputSpec, OutputSpec
+
+nodes_field = NodesField(expand=True)
+
+await nodes_field.add_node(
+    prototype='math.add',
+    x=100, y=100,
+    name='Add',
+    inputs=[
+        InputSpec(id='a', displayName='A', type='double', default=0.0),
+        InputSpec(id='b', displayName='B', type='double', default=0.0)
+    ],
+    outputs=[
+        OutputSpec(id='result', displayName='Result', type='double')
+    ]
+)
+</code></pre>
+<h3 id="3-execute-nodes">3. Execute Nodes</h3>
+<p>After connecting nodes in the UI:</p>
+<pre><code class="language-python"># Execute a specific node (automatically evaluates dependencies)
+result = await nodes_field.execute('node_id')
+print(result)  # {'result': 42}
+
+# Validate graph before execution
+is_valid, error = nodes_field.validate_graph()
+if is_valid:
+    result = await nodes_field.execute('node_id', clear_cache=True)
+</code></pre>
+<h3 id="4-access-ui-content-in-logic">4. Access UI Content in Logic</h3>
+<p>Nodes can read from their UI controls:</p>
+<pre><code class="language-python">class TextNodeLogic(BaseNodeLogic):
+    async def execute(self, node, **inputs):
+        # Access UI control
+        if isinstance(node.ui_content, ft.TextField):
+            value = node.ui_content.value
+            return {'output': value}
+
+        # Fallback to input
+        return {'output': inputs.get('input', '')}
+</code></pre>
+<h2 id="example-logic-implementations">Example Logic Implementations</h2>
+<p>The package includes several example implementations in <code>example_logic.py</code>:</p>
+<ul>
+<li><strong>SimpleValueLogic</strong>: Reads from TextField or passes through input</li>
+<li><strong>BoolNodeLogic</strong>: Boolean value node with Checkbox support</li>
+<li><strong>IfElseLogic</strong>: Conditional branching</li>
+<li><strong>MathAddLogic</strong>: Add two numbers</li>
+<li><strong>MathMultiplyLogic</strong>: Multiply two numbers</li>
+<li><strong>PrintLogic</strong>: Debug output node</li>
+</ul>
+<p>Register all examples:</p>
+<pre><code class="language-python">from flet_nodes import register_all_example_logic
+
+register_all_example_logic()
+</code></pre>
+<h2 id="execution-flow">Execution Flow</h2>
+<ol>
+<li><strong>User triggers execution</strong> on a target node</li>
+<li><strong>Graph validation</strong> checks for cycles and invalid connections</li>
+<li><strong>Recursive pull</strong>: Executor walks backwards from target</li>
+<li><strong>Parallel evaluation</strong>: Dependencies execute concurrently</li>
+<li><strong>Input gathering</strong>: Values collected from connected outputs</li>
+<li><strong>Logic execution</strong>: Node's <code>execute()</code> method runs</li>
+<li><strong>Result caching</strong>: Output stored to avoid recomputation</li>
+<li><strong>Return</strong>: Final result bubbles back to caller</li>
+</ol>
+<h2 id="connection-synchronization">Connection Synchronization</h2>
+<p>Dart emits events when users create/remove connections:</p>
+<pre><code class="language-python"># Automatic - handled internally
+NodesField.on_link_created  → updates Graph.connections
+NodesField.on_link_removed  → removes from Graph.connections
+</code></pre>
+<p>The runtime graph stays synchronized with UI connections automatically.</p>
+<h2 id="advanced-features">Advanced Features</h2>
+<h3 id="custom-logic-validation">Custom Logic Validation</h3>
+<pre><code class="language-python">class ValidatedLogic(BaseNodeLogic):
+    async def validate_inputs(self, node, **inputs):
+        if inputs.get('value', 0) &lt; 0:
+            return False, &quot;Value must be positive&quot;
+        return True, None
+
+    async def execute(self, node, **inputs):
+        return {'output': inputs['value'] * 2}
+</code></pre>
+<h3 id="lifecycle-callbacks">Lifecycle Callbacks</h3>
+<pre><code class="language-python">class LifecycleLogic(BaseNodeLogic):
+    def on_node_created(self, node):
+        print(f&quot;Node {node.id} created&quot;)
+
+    def on_node_removed(self, node):
+        print(f&quot;Node {node.id} removed&quot;)
+
+    async def execute(self, node, **inputs):
+        return {'output': 42}
+</code></pre>
+<h3 id="execution-order-analysis">Execution Order Analysis</h3>
+<pre><code class="language-python">executor = AsyncGraphExecutor(nodes_field.get_graph())
+order = executor.get_execution_order('target_node_id')
+print(f&quot;Will execute in order: {order}&quot;)
+</code></pre>
+<h3 id="selective-cache-clearing">Selective Cache Clearing</h3>
+<pre><code class="language-python"># Clear cache for a node and all dependents
+executor.clear_downstream_cache('node_id')
+
+# Execute with fresh cache
+result = await nodes_field.execute('node_id', clear_cache=True)
+</code></pre>
+<h2 id="error-handling">Error Handling</h2>
+<pre><code class="language-python">from flet_nodes import ExecutionError, CyclicDependencyError
+
+try:
+    result = await nodes_field.execute('node_id')
+except CyclicDependencyError as e:
+    print(f&quot;Graph contains cycle: {e}&quot;)
+except ExecutionError as e:
+    print(f&quot;Execution failed: {e}&quot;)
+</code></pre>
+<h2 id="testing">Testing</h2>
+<p>Run the example:</p>
+<pre><code class="language-bash">cd examples/flet_nodes_example
+uv run --active flet -r src/main.py
+</code></pre>
+<ol>
+<li>Click "Register Types" to register basic types</li>
+<li>Click "Demo Nodes" to create example nodes</li>
+<li>Connect nodes by dragging from output → input ports</li>
+<li>Select a node</li>
+<li>Click "Execute Selected" to run it</li>
+</ol>
+<h2 id="design-principles">Design Principles</h2>
+<p>✅ <strong>UI stays presentation-only</strong> - No execution logic in Flutter
+✅ <strong>Runtime is framework-independent</strong> - Can run headless
+✅ <strong>Executor doesn't depend on Flutter</strong> - Pure Python async
+✅ <strong>Logic is modular</strong> - Easy to add new node types
+✅ <strong>Graph supports headless execution</strong> - Can run without UI</p>
+<h2 id="files-created">Files Created</h2>
+<ul>
+<li><code>src/flet_nodes/runtime_graph.py</code> - Core graph data structures</li>
+<li><code>src/flet_nodes/node_logic.py</code> - Logic system and registry</li>
+<li><code>src/flet_nodes/executor.py</code> - Async execution engine</li>
+<li><code>src/flet_nodes/example_logic.py</code> - Example implementations</li>
+<li>Updated <code>src/flet_nodes/flet_nodes.py</code> - Integration</li>
+<li>Updated <code>src/flutter/flet_nodes/lib/src/NodesField.dart</code> - Connection events</li>
+<li>Updated <code>examples/flet_nodes_example/src/main.py</code> - Demo</li>
+</ul>
+<h2 id="future-enhancements">Future Enhancements</h2>
+<p>Possible extensions:</p>
+<ul>
+<li>[ ] Persist graph to JSON/file</li>
+<li>[ ] Undo/redo for graph modifications</li>
+<li>[ ] Execution visualization (animated flow)</li>
+<li>[ ] Breakpoints and step-through debugging</li>
+<li>[ ] Performance profiling per node</li>
+<li>[ ] Distributed execution across multiple processes</li>
+<li>[ ] Type checking at connection time</li>
+<li>[ ] Auto-save execution results</li>
+<li>[ ] Graph diff and merge</li>
+</ul>
+<h2 id="license">License</h2>
+<p>Same as flet_nodes parent project.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

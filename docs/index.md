@@ -1,34 +1,13 @@
-# Introduction
+# Origins and Credits (English)
 
-FletNodes for Flet.
+This project was inspired by `fl_nodes` (https://github.com/WilliamKarolDiCioccio/fl_nodes). Many UI patterns—port handling, link UX, and node interactions—draw from that work.
 
-## Examples
+What we did differently
 
-```
-import flet as ft
+- UI layer: implemented with Flet + embedded Flutter components to render nodes and ports.
+- Runtime: a separate Python async execution engine that is headless-testable and decoupled from the UI.
+- Integration: events from the Flutter node editor are synchronized to the Python `Graph` so the runtime always reflects the visual state.
 
-from flet_nodes import FletNodes
+Acknowledgements
 
-
-def main(page: ft.Page):
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-
-    page.add(
-
-                ft.Container(height=150, width=300, alignment = ft.Alignment.CENTER, bgcolor=ft.Colors.PURPLE_200, content=FletNodes(
-                    tooltip="My new FletNodes Control tooltip",
-                    value = "My new FletNodes Flet Control", 
-                ),),
-
-    )
-
-
-ft.run(main)
-```
-
-## Classes
-
-[FletNodes](FletNodes.md)
-
-
+Thanks to the `fl_nodes` author for the reference implementation and ideas. This repository reuses concepts where appropriate but is an independent implementation tailored to Flet + Python.

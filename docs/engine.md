@@ -1,3 +1,4 @@
+
 # Async Node Execution Engine
 
 ## Overview
@@ -146,7 +147,7 @@ class TextNodeLogic(BaseNodeLogic):
         if isinstance(node.ui_content, ft.TextField):
             value = node.ui_content.value
             return {'output': value}
-      
+    
         # Fallback to input
         return {'output': inputs.get('input', '')}
 ```
