@@ -19,10 +19,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://mydomain.dev"
-Documentation = "https://github.com/MyGithubAccount/flet-nodes"
-Repository = "https://github.com/MyGithubAccount/flet-nodes"
-Issues = "https://github.com/MyGithubAccount/flet-nodes/issues"
+Homepage = "https://github.com/Wanna-Pizza/flet-node-system"
+Documentation = "https://github.com/Wanna-Pizza/flet-node-system#readme"
+Repository = "https://github.com/Wanna-Pizza/flet-node-system"
+Issues = "https://github.com/Wanna-Pizza/flet-node-system/issues"
 
 [tool.setuptools.package-data]
 "flutter.flet_nodes" = ["**/*"]

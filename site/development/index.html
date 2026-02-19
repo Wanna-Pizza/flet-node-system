@@ -13,24 +13,28 @@
       
       
       
+        <link rel="prev" href="../interface/">
+      
+      
+        <link rel="next" href="../architecture/">
       
       
         
       
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Flet Node System</title>
+        <title>Development - Flet Node System</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -49,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -75,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#development-adding-custom-node-logic" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -87,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="Flet Node System" class="md-header__button md-logo" aria-label="Flet Node System" data-md-component="logo">
+    <a href=".." title="Flet Node System" class="md-header__button md-logo" aria-label="Flet Node System" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -107,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Development
             
           </span>
         </div>
@@ -169,7 +178,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Flet Node System" class="md-nav__button md-logo" aria-label="Flet Node System" data-md-component="logo">
+    <a href=".." title="Flet Node System" class="md-nav__button md-logo" aria-label="Flet Node System" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -199,7 +208,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -226,7 +235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/interface/" class="md-nav__link">
+      <a href="../interface/" class="md-nav__link">
         
   
   
@@ -250,10 +259,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/development/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -269,6 +305,109 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-define-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Define Logic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-register" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Register
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-node-with-ui-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Node with UI Input
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -280,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/architecture/" class="md-nav__link">
+      <a href="../architecture/" class="md-nav__link">
         
   
   
@@ -307,7 +446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/examples/" class="md-nav__link">
+      <a href="../examples/" class="md-nav__link">
         
   
   
@@ -334,7 +473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/engine/" class="md-nav__link">
+      <a href="../engine/" class="md-nav__link">
         
   
   
@@ -361,7 +500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/building/" class="md-nav__link">
+      <a href="../building/" class="md-nav__link">
         
   
   
@@ -398,6 +537,99 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-define-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Define Logic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-register" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Register
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Test">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-node-with-ui-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Node with UI Input
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -410,8 +642,91 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="development-adding-custom-node-logic">Development — Adding Custom Node Logic</h1>
+<h2 id="step-1-define-logic">Step 1: Define Logic</h2>
+<p>Create a subclass of <code>BaseNodeLogic</code> with async <code>execute()</code> method:</p>
+<pre><code class="language-python">from flet_nodes import BaseNodeLogic
+
+class DoubleLogic(BaseNodeLogic):
+    &quot;&quot;&quot;Multiplies input by 2.&quot;&quot;&quot;
+
+    async def execute(self, node, **inputs):
+        value = inputs.get('value', 0)
+        return {'result': value * 2}
+</code></pre>
+<p><strong>Key points:</strong>
+- <code>execute()</code> is async—use <code>await</code> for I/O operations
+- <code>**inputs</code> contains values from connected ports (or defaults)
+- Return a dict with output IDs as keys
+- Raise exceptions to signal errors</p>
+<h2 id="step-2-register">Step 2: Register</h2>
+<p>Register the logic class with a prototype ID:</p>
+<pre><code class="language-python">from flet_nodes import register_node_logic
+
+register_node_logic('math.double', DoubleLogic)
+</code></pre>
+<p>Now users can create nodes with prototype <code>'math.double'</code> in the UI.</p>
+<h2 id="step-3-test">Step 3: Test</h2>
+<h3 id="unit-test">Unit Test</h3>
+<pre><code class="language-python">import pytest
+from flet_nodes import RuntimeNode, InputSocket
+from your_module import DoubleLogic
+
+@pytest.mark.asyncio
+async def test_double_logic():
+    logic = DoubleLogic()
+    node = RuntimeNode(id='test', prototype='math.double')
+
+    result = await logic.execute(node, value=5)
+    assert result['result'] == 10
+</code></pre>
+<h3 id="integration-test">Integration Test</h3>
+<p>Run the example app:</p>
+<pre><code class="language-bash">cd examples/flet_nodes_example
+uv run --active flet -r src/main.py
+</code></pre>
+<p>Then:
+1. Click "Register Types"
+2. Click "Demo Nodes"
+3. Connect and execute nodes to verify behavior</p>
+<h2 id="tips">Tips</h2>
+<ul>
+<li><strong>Use <code>node.ui_content</code></strong> to read fallback values from UI controls</li>
+<li><strong>Cache expensive operations</strong> if nodes might execute multiple times</li>
+<li><strong>Log execution</strong>: Add <code>print()</code> or <code>logging</code> to debug dataflow</li>
+<li><strong>Type hints</strong>: Add return type hints for IDE support</li>
+</ul>
+<h2 id="example-node-with-ui-input">Example: Node with UI Input</h2>
+<pre><code class="language-python">class InputLogic(BaseNodeLogic):
+    async def execute(self, node, **inputs):
+        # Read from UI control if no input connected
+        if node.ui_content and hasattr(node.ui_content, 'value'):
+            value = node.ui_content.value
+        else:
+            value = inputs.get('fallback', '')
+
+        return {'output': value}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -448,10 +763,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/", "features": ["navigation.instant", "navigation.tracking", "content.code.copy", "content.code.annotate"], "search": "/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

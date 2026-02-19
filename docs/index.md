@@ -1,13 +1,30 @@
-# Origins and Credits (English)
+# Flet Node System
 
-This project was inspired by `fl_nodes` (https://github.com/WilliamKarolDiCioccio/fl_nodes). Many UI patterns—port handling, link UX, and node interactions—draw from that work.
+## What is Flet Node System?
 
-What we did differently
+Flet Node System is a **visual node editor + async Python runtime** for building dataflow-based applications. It lets you:
 
-- UI layer: implemented with Flet + embedded Flutter components to render nodes and ports.
-- Runtime: a separate Python async execution engine that is headless-testable and decoupled from the UI.
-- Integration: events from the Flutter node editor are synchronized to the Python `Graph` so the runtime always reflects the visual state.
+1. **Design node graphs visually** using a Flutter-based editor in Flet
+2. **Execute them asynchronously** with a pure Python runtime
+3. **Extend with custom nodes** by writing simple Python classes
 
-Acknowledgements
+## Key Features
 
-Thanks to the `fl_nodes` author for the reference implementation and ideas. This repository reuses concepts where appropriate but is an independent implementation tailored to Flet + Python.
+- **Separation of Concerns**: UI layer is completely independent from execution layer
+- **Concurrent Execution**: Dependencies are evaluated in parallel; results are cached
+- **Type Safety**: Optional type hints for inputs/outputs
+- **Cycle Detection**: Automatic validation of node graphs
+- **Easy Extensibility**: Add new node types without touching UI code
+
+## Documentation Structure
+
+- **[Interface](interface.md)** — how to define nodes and specs
+- **[Architecture](architecture.md)** — deep dive into layers and execution flow
+- **[Development](development.md)** — extending with custom node logic
+- **[Examples](examples.md)** — runnable demos and patterns
+- **[Building](building.md)** — setup and running
+- **[Engine](engine.md)** — advanced execution details
+
+## Start Here
+
+New to Flet Node System? Check out [Examples](examples.md) for a quick demo.

@@ -127,23 +127,25 @@ class IfElseLogic(BaseNodeLogic):
         Execute if-else logic.
         
         Inputs:
-            condition: boolean value to evaluate
+            condition: boolean condition to evaluate
+            true_value: value to output if condition is True
+            false_value: value to output if condition is False
         
         Outputs:
-            bool_out_true: True if condition is true, None otherwise
-            bool_out_false: True if condition is false, None otherwise
+            value: value from true_value if condition is True, else from false_value
         """
-        condition = inputs.get("condition", False)
+        condition = inputs.get('condition', False)
+        true_value = inputs.get('true_value', None)
+        false_value = inputs.get('false_value', None)
         
+
         if condition:
             return {
-                "bool_out_true": True,
-                "bool_out_false": None
+                "value": true_value
             }
         else:
             return {
-                "bool_out_true": None,
-                "bool_out_false": True
+                "value": false_value
             }
 
 
@@ -171,6 +173,28 @@ class MathAddLogic(BaseNodeLogic):
         
         result = a + b
         return {"result": result}
+
+class CompareLogic(BaseNodeLogic):
+        """
+        Logic for 'compare.node' prototype.
+
+        Outputs:
+            is_equal: True if a == b, False otherwise
+        """
+
+        async def execute(self, node: RuntimeNode, **inputs) -> Dict[str, Any]:
+            a = inputs.get('a', 0)
+            b = inputs.get('b', 0)
+            try:
+                a = float(a) if not isinstance(a, (int, float)) else a
+                b = float(b) if not isinstance(b, (int, float)) else b
+            except (ValueError, TypeError):
+                a = 0.0
+                b = 0.0
+
+            return {
+                'is_equal': a == b,
+            }
 
 
 class MathMultiplyLogic(BaseNodeLogic):
@@ -210,7 +234,7 @@ class PrintLogic(BaseNodeLogic):
         
         print(f"[{label}] {value}")
         
-        return {"value": value}
+        return {"out_value": value}
 
 
 # Convenience function to register all example logic
@@ -225,4 +249,7 @@ def register_all_example_logic():
     register_node_logic("math.add", MathAddLogic)
     register_node_logic("math.multiply", MathMultiplyLogic)
     register_node_logic("debug.print", PrintLogic)
+    # Compare node: compares two numeric inputs and returns boolean flags
+
+    register_node_logic("compare.node", CompareLogic)
     

@@ -34,6 +34,16 @@ class main:
         self.main_content = ft.Column([
             ft.Row([
                 ft.ElevatedButton("Demo Nodes", on_click=self.create_demo_nodes),
+                ft.PopupMenuButton("Add Node", items=[
+                    ft.PopupMenuItem(content=ft.Text("Value A"), on_click=self._create_value_a),
+                    ft.PopupMenuItem(content=ft.Text("Value B"), on_click=self._create_value_b),
+                    ft.PopupMenuItem(content=ft.Text("Add"), on_click=self._create_add_node),
+                    ft.PopupMenuItem(content=ft.Text("Multiply"), on_click=self._create_multiply_node),
+                    ft.PopupMenuItem(content=ft.Text("Debug Print"), on_click=self._create_debug_print),
+                    ft.PopupMenuItem(content=ft.Text("Bool Node"), on_click=self._create_bool_node),
+                    ft.PopupMenuItem(content=ft.Text("Compare"), on_click=self._create_compare_node),
+                    ft.PopupMenuItem(content=ft.Text("If Else"), on_click=self._create_ifelse_node),
+                ]),
                 ft.ElevatedButton("Clear Nodes", on_click=self.clear_nodes),
                 ft.ElevatedButton("Execute Selected", on_click=self.execute_selected, bgcolor=ft.Colors.GREEN_700),
             ]),
@@ -58,48 +68,119 @@ class main:
         y = 100
 
         try:
-            # Math nodes demo (below)
-            print("Creating Value A node...")
-            await self.nodes_field.add_node(
-                prototype='float.value',
-                x=x, y=y+200,
-                name='Value A',
-                content=ft.TextField(label="Value A", value="5"),
-                inputs=[InputSpec(id='in_value', displayName='In', type='double', default=5.0)],
-                outputs=[OutputSpec(id='out_value', displayName='Out', type='double')]
-            )
-            await self.nodes_field.add_node(
-                prototype='float.value',
-                x=x, y=y+400,
-                name='Value B',
-                content=ft.TextField(label="Value B", value="3"),
-                inputs=[InputSpec(id='in_value', displayName='In', type='double', default=3.0)],
-                outputs=[OutputSpec(id='out_value', displayName='Out', type='double')]
-            )
-
-            await self.nodes_field.add_node(
-                prototype='math.add',
-                x=x+300, y=y+250,
-                name='Add',
-                inputs=[InputSpec(id='a', displayName='A', type='double', default=0.0),
-                        InputSpec(id='b', displayName='B', type='double', default=0.0)],
-                outputs=[OutputSpec(id='result', displayName='Result', type='double')]
-            )
-
-            await self.nodes_field.add_node(
-                prototype='math.multiply',
-                x=x+600, y=y+250,
-                name='Multiply',
-                inputs=[InputSpec(id='a', displayName='A', type='double', default=1.0),
-                        InputSpec(id='b', displayName='B', type='double', default=2.0)],
-                outputs=[OutputSpec(id='result', displayName='Result', type='double')]
-            )
+            # Create demo nodes via helper functions
+            await self._create_value_a(None)
+            await self._create_value_b(None)
+            await self._create_add_node(None)
+            await self._create_debug_print(None)
+            await self._create_bool_node(None)
+            await self._create_ifelse_node(None)
+            await self._create_multiply_node(None)
 
             print('Demo nodes created - connect them in the UI and execute!')
         except Exception as ex:
             print(f"ERROR creating demo nodes: {ex}")
             import traceback
             traceback.print_exc()
+
+    # --- Individual node creation helpers ---
+    async def _create_value_a(self, e):
+        x = 100
+        y = 100
+        await self.nodes_field.add_node(
+            prototype='float.value',
+            x=x, y=y,
+            name='Value A',
+            content=ft.TextField(label="Value A", value="5"),
+            inputs=[InputSpec(id='in_value', displayName='In', type='double', default=5.0)],
+            outputs=[OutputSpec(id='out_value', displayName='Out', type='double')]
+        )
+
+    async def _create_value_b(self, e):
+        x = 100
+        y = 100
+        await self.nodes_field.add_node(
+            prototype='float.value',
+            x=x, y=y,
+            name='Value B',
+            content=ft.TextField(label="Value B", value="3"),
+            inputs=[InputSpec(id='in_value', displayName='In', type='double', default=3.0)],
+            outputs=[OutputSpec(id='out_value', displayName='Out', type='double')]
+        )
+
+    async def _create_add_node(self, e):
+        x = 100
+        y = 100
+        await self.nodes_field.add_node(
+            prototype='math.add',
+            x=x, y=y,
+            name='Add',
+            inputs=[InputSpec(id='a', displayName='A', type='double', default=0.0),
+                    InputSpec(id='b', displayName='B', type='double', default=0.0)],
+            outputs=[OutputSpec(id='result', displayName='Result', type='double')]
+        )
+
+    async def _create_debug_print(self, e):
+        x = 100
+        y = 100
+        await self.nodes_field.add_node(
+            prototype='debug.print',
+            x=x, y=y,
+            name='Debug Print',
+            inputs=[InputSpec(id='value', displayName='A', type='string', default="Nope!")],
+            outputs=[OutputSpec(id='out_value', displayName='Out', type='string')]
+        )
+
+    async def _create_bool_node(self, e):
+        x = 100
+        y = 100
+        await self.nodes_field.add_node(
+            prototype='bool.node',
+            x=x, y=y,
+            content=ft.Checkbox(label="Bool Node", value=True),
+            name='Bool Node',
+            inputs=[InputSpec(id='bool_in', displayName='A', type='bool', default=True)],
+            outputs=[OutputSpec(id='bool_out', displayName='Out', type='bool')]
+        )
+
+    async def _create_ifelse_node(self, e):
+        x = 100
+        y = 100
+        await self.nodes_field.add_node(
+            prototype='ifelse.node',
+            x=x, y=y,
+            name='If Else',
+            inputs=[
+                InputSpec(id='condition', displayName='Condition', type='bool', default=False),
+                InputSpec(id='true_value', displayName='True Value', type='any', default=None),
+                InputSpec(id='false_value', displayName='False Value', type='any', default=None)
+            ],
+            outputs=[OutputSpec(id='value', displayName='Value', type='any')]
+        )
+
+    async def _create_multiply_node(self, e):
+        x = 100
+        y = 100
+        await self.nodes_field.add_node(
+            prototype='math.multiply',
+            x=x, y=y,
+            name='Multiply',
+            inputs=[InputSpec(id='a', displayName='A', type='double', default=1.0),
+                    InputSpec(id='b', displayName='B', type='double', default=2.0)],
+            outputs=[OutputSpec(id='result', displayName='Result', type='double')]
+        )
+
+    async def _create_compare_node(self, e):
+        x = 100
+        y = 100
+        await self.nodes_field.add_node(
+            prototype='compare.node',
+            x=x, y=y,
+            name='Compare',
+            inputs=[InputSpec(id='a', displayName='A', type='double', default=0.0),
+                    InputSpec(id='b', displayName='B', type='double', default=0.0)],
+            outputs=[OutputSpec(id='is_equal', displayName='Equal', type='bool')]
+        )
 
     async def clear_nodes(self, e):
         await self.nodes_field.clear_nodes()
