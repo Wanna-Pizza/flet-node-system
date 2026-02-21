@@ -5,19 +5,25 @@ from dataclasses import dataclass, field
 import flet as ft
 
 # Import runtime graph and execution modules
-from .runtime_graph import Graph, RuntimeNode, InputSocket, OutputSocket, Connection, ExecutionState
+from .runtime_graph import Graph, RuntimeNode, InputSocket, OutputSocket, Connection, ExecutionState, SocketKind
 from .executor import AsyncGraphExecutor, ExecutionError, CyclicDependencyError
 from .node_logic import BaseNodeLogic, register_node_logic, get_node_logic, get_registry
+from .execution_context import ExecutionContext, BreakException, ContinueException
+from .control_flow_executor import ControlFlowExecutor, ControlFlowExecutionError, InfiniteExecutionError
 
 __all__ = [
     "NodesField", "Node", "NodeSelectedEvent", "LinkCreatedEvent", "LinkRemovedEvent",
     "InputSpec", "OutputSpec",
     # Runtime graph
-    "Graph", "RuntimeNode", "InputSocket", "OutputSocket", "Connection", "ExecutionState",
+    "Graph", "RuntimeNode", "InputSocket", "OutputSocket", "Connection", "ExecutionState", "SocketKind",
     # Executor
     "AsyncGraphExecutor", "ExecutionError", "CyclicDependencyError",
     # Logic system
     "BaseNodeLogic", "register_node_logic", "get_node_logic", "get_registry",
+    # Execution context
+    "ExecutionContext", "BreakException", "ContinueException",
+    # Control flow executor
+    "ControlFlowExecutor", "ControlFlowExecutionError", "InfiniteExecutionError",
 ]
 
 
@@ -194,25 +200,36 @@ class NodesField(ft.LayoutControl):
                 self._nodes[node_id]["ports"] = {"inputs": norm_inputs, "outputs": norm_outputs}
             except Exception:
                 pass
-            
+
             # Create RuntimeNode and add to graph
             try:
+                # Determine socket kind based on port type
+                def get_socket_kind(port_type):
+                    """Determine SocketKind based on port type."""
+                    if port_type in ('exec', 'execution'):
+                        return SocketKind.EXEC
+                    return SocketKind.DATA
+                
                 # create input/output sockets
                 input_sockets = {}
                 for inp in norm_inputs:
+                    port_type = inp.get("type", "data")
                     input_sockets[inp["id"]] = InputSocket(
                         id=inp["id"],
                         display_name=inp.get("displayName", inp["id"]),
-                        type=inp.get("type"),
+                        type=port_type,
+                        kind=get_socket_kind(port_type),
                         default=inp.get("default")
                     )
                 
                 output_sockets = {}
                 for outp in norm_outputs:
+                    port_type = outp.get("type", "data")
                     output_sockets[outp["id"]] = OutputSocket(
                         id=outp["id"],
                         display_name=outp.get("displayName", outp["id"]),
-                        type=outp.get("type")
+                        type=port_type,
+                        kind=get_socket_kind(port_type)
                     )
                 
                 # create runtime node
@@ -271,17 +288,53 @@ class NodesField(ft.LayoutControl):
         try:
             if hasattr(self, '_nodes') and id in self._nodes:
                 del self._nodes[id]
-            # remove from graph
+            # clear graph
             graph = self._get_graph()
-            if id in graph.nodes:
-                # call on_node_removed callback if logic exists
-                node = graph.nodes[id]
+            # call on_node_removed for all nodes
+            for node in list(graph.nodes.values()):
                 if node.logic is not None:
                     node.logic.on_node_removed(node)
-                graph.remove_node(id)
+            graph.nodes.clear()
+            graph.connections.clear()
         except Exception:
             pass
         return res
+
+    async def add_link(self, from_node: str, from_port: str, to_node: str, to_port: str, retries: int = 5, retry_delay: float = 0.02):
+        """Programmatically add a link between two node ports in the UI.
+
+        Retries a few times on transient failure (frontend not ready).
+        Returns the front-end result (link id dict) or False / error dict.
+        """
+        import asyncio
+
+        payload = {
+            'from_node': from_node,
+            'from_port': from_port,
+            'to_node': to_node,
+            'to_port': to_port,
+        }
+
+        last_res = None
+        for attempt in range(1, retries + 1):
+            try:
+                res = await self._invoke_method('add_link', payload)
+            except Exception as ex:
+                res = False
+                print(f"NodesField.add_link: invoke_method exception: {ex}")
+
+            last_res = res
+            # treat any truthy/non-False return as success
+            if res is not False and res is not None:
+                return res
+
+            # short backoff before retrying
+            await asyncio.sleep(retry_delay)
+
+        print(f"Warning: add_link failed after {retries} attempts: {payload} -> {last_res}")
+        return last_res
+
+
 
     async def clear_nodes(self):
         res = await self._invoke_method("clear_nodes", {})
@@ -303,27 +356,47 @@ class NodesField(ft.LayoutControl):
     def _on_link_created(self, e: LinkCreatedEvent):
         """Internal handler for link creation events from Flutter."""
         try:
+            graph = self._get_graph()
+            
+            # Determine connection kind from socket kinds
+            kind = SocketKind.DATA  # default
+            
+            # Check if source output has a kind
+            if e.from_node in graph.nodes and e.from_port in graph.nodes[e.from_node].outputs:
+                from_socket = graph.nodes[e.from_node].outputs[e.from_port]
+                kind = from_socket.kind
+            
             connection = Connection(
                 from_node=e.from_node,
                 from_port=e.from_port,
                 to_node=e.to_node,
-                to_port=e.to_port
+                to_port=e.to_port,
+                kind=kind
             )
-            self._get_graph().add_connection(connection)
-            print(f"Connection added: {e.from_node}.{e.from_port} -> {e.to_node}.{e.to_port}")
+            graph.add_connection(connection)
+            print(f"Connection added: {e.from_node}.{e.from_port} -> {e.to_node}.{e.to_port} (kind={kind.value})")
         except Exception as ex:
             print(f"Error adding connection: {ex}")
     
     def _on_link_removed(self, e: LinkRemovedEvent):
         """Internal handler for link removal events from Flutter."""
         try:
+            graph = self._get_graph()
+            
+            # Determine connection kind from socket kinds
+            kind = SocketKind.DATA  # default
+            if e.from_node in graph.nodes and e.from_port in graph.nodes[e.from_node].outputs:
+                from_socket = graph.nodes[e.from_node].outputs[e.from_port]
+                kind = from_socket.kind
+            
             connection = Connection(
                 from_node=e.from_node,
                 from_port=e.from_port,
                 to_node=e.to_node,
-                to_port=e.to_port
+                to_port=e.to_port,
+                kind=kind
             )
-            self._get_graph().remove_connection(connection)
+            graph.remove_connection(connection)
             print(f"Connection removed: {e.from_node}.{e.from_port} -> {e.to_node}.{e.to_port}")
         except Exception as ex:
             print(f"Error removing connection: {ex}")

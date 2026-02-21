@@ -13,8 +13,8 @@ This repository provides a complete system for building visual node-based editor
 ## Use Cases
 
 - Rapid prototyping of dataflow pipelines (ETL, data transformations)
-- Game logic and event-driven UI automation
-- Visual programming interfaces for end users
+- Event-driven UI automation
+- Visual programming for end users
 - Separation of concerns: UI rendering vs. business logic execution
 
 ## Getting Started

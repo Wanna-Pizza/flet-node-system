@@ -71,6 +71,13 @@ Then:
 - **Log execution**: Add `print()` or `logging` to debug dataflow
 - **Type hints**: Add return type hints for IDE support
 
+## Special support: Flow/ForEach
+
+Flow mode graphs use a separate executor that follows EXEC connections and
+allow nodes to return a ``next_exec`` value. The builtin ``flow.foreach``
+family of nodes relies on this engine; see the dedicated documentation page
+at **ForEach** (linked in the nav) for details on writing and debugging loops.
+
 ## Example: Node with UI Input
 
 ```python

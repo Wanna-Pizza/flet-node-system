@@ -7,10 +7,17 @@ Flet Node System separates **visual editing** from **computation execution**, en
 - **UI Layer**: Renders nodes, handles interactions, emits events (Flutter + Flet)
 - **Graph Layer**: Stores nodes and connections independently of UI (Pure Python)
 - **Executor**: Validates and executes graph asynchronously (Async Python engine)
+  - the primary executor is pull‑based and evaluates DATA dependencies
+  - a secondary **control‑flow executor** walks EXEC edges and handles loops
+    (including re‑entrant ForEach) and conditionals
 
 ## How Execution Works
 
 **Example Graph**: A → B → C (each node's output connects to the next)
+
+For flow‑mode graphs the “edges” may be execution tokens instead of
+value wires; the control‑flow executor simply follows those EXEC links in
+sequence, allowing nodes to dynamically choose the next target.
 
 **Process**: `execute(node_C)`
 

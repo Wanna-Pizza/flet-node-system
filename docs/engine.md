@@ -21,6 +21,8 @@ This document details the async execution engine powering Flet Node System. It c
 * ✅ **Graph Validation**: Automatic cycle detection and input checking
 * ✅ **Auto-Sync**: Connections between Dart UI and Python runtime stay in sync
 * ✅ **Modular Logic**: New node types added by registering Python classes
+* ✅ **Control Flow Support**: A secondary executor follows EXEC edges to drive
+  loops, conditionals and re‑entrant ForEach semantics
 
 ## Core Components
 
@@ -154,7 +156,6 @@ class TextInputLogic(BaseNodeLogic):
 ```
 
 ## How Execution Works
-
 ### The Pull-Based Algorithm
 
 When you call `executor.execute('target_node_id')`:
@@ -193,6 +194,42 @@ execute('C')
 ```
 
 ### Concurrency with asyncio.gather()
+
+
+### Control‑Flow and ForEach Loops
+
+In addition to the normal pull‑based evaluation described above, the
+engine also provides a **control‑flow executor** used by Flow Mode graphs. In
+this mode each node may return a ``next_exec`` output that tells the executor
+which node to run next; the graph is traversed by following **EXEC**
+connections rather than data dependencies.
+
+The `ControlFlowExecutor` (see :mod:`control_flow_executor`) features:
+
+* step counter with a safety limit to detect infinite loops
+* re‑entrant behaviour – nested loops (especially ``flow.foreach``) push and
+  pop a loop stack without clearing the overall history or context
+* fast‑path input handling for ``foreach.item`` and ``foreach.index`` nodes,
+  which simply read the current value directly from the shared
+  :class:`ExecutionContext` rather than evaluating an upstream node
+* optional debug traces printed to stdout to aid development
+
+A typical ForEach pattern looks like:
+
+```
+    flow.foreach ─  ─┐
+                    ├── loop_body -> … -> foreach.iterator ─┐
+                    │                                       │
+                    └───────── completed <───────────────── ┘
+```
+
+The ``foreach.iterator`` node advances the loop index and either jumps back to
+``loop_body`` (for the next item) or returns ``completed`` when the list is
+finished. See ``example_logic.py`` and
+``FOREACH_REENTRANT_EXECUTION.md`` for the full algorithm.
+
+This hybrid execution model allows dataflow graphs to include imperative
+constructs without giving up async evaluation or caching semantics.
 
 When multiple nodes are independent, they execute in parallel:
 

@@ -224,6 +224,8 @@ class NodesFieldControlState extends State<NodesFieldControl>
         return await _handleRemoveNode(args);
       case 'clear_nodes':
         return await _handleClearNodes(args);
+      case 'add_link':
+        return await _handleAddLink(args);
       default:
         throw Exception('Unknown NodesField method: $name');
     }
@@ -265,6 +267,17 @@ class NodesFieldControlState extends State<NodesFieldControl>
           final id = spec is Map ? (spec['id'] ?? spec['idName']) : spec.toString();
           final label = (spec is Map && spec['displayName'] != null) ? spec['displayName'].toString() : id.toString();
           final typeLabel = (spec is Map && spec['type'] != null) ? spec['type'].toString() : null;
+
+          // Special-case control/execution ports
+          if (typeLabel == 'exec' || typeLabel == 'execution') {
+            portPrototypes.add(FlControlInputPortPrototype(
+              idName: id.toString(),
+              displayName: (ctx) => label,
+              geometricOrientation: FlPortGeometricOrientation.left,
+              styleBuilder: flDefaultPortStyleBuilder,
+            ));
+            return;
+          }
 
           if (typeLabel != null && _typeRegistry.has(typeLabel)) {
             final entry = _typeRegistry.getEntry(typeLabel)!;
@@ -322,6 +335,17 @@ class NodesFieldControlState extends State<NodesFieldControl>
           final label = (spec is Map && spec['displayName'] != null) ? spec['displayName'].toString() : id.toString();
           final typeLabel = (spec is Map && spec['type'] != null) ? spec['type'].toString() : null;
           final link = FlLinkPrototype(label: (_) => typeLabel ?? '');
+
+          // Control / exec output ports
+          if (typeLabel == 'exec' || typeLabel == 'execution') {
+            portPrototypes.add(FlControlOutputPortPrototype(
+              idName: id.toString(),
+              displayName: (ctx) => label,
+              geometricOrientation: FlPortGeometricOrientation.right,
+              styleBuilder: flDefaultPortStyleBuilder,
+            ));
+            return;
+          }
 
           if (typeLabel != null && _typeRegistry.has(typeLabel)) {
             final entry = _typeRegistry.getEntry(typeLabel)!;
@@ -447,6 +471,55 @@ class NodesFieldControlState extends State<NodesFieldControl>
       _controller.removeNodeById(id);
     }
     return true;
+  }
+
+  // Programmatic link creation from Python
+  Future<dynamic> _handleAddLink(dynamic args) async {
+    try {
+      final fromNode = args['from_node'] as String?;
+      final fromPort = args['from_port'] as String?;
+      final toNode = args['to_node'] as String?;
+      final toPort = args['to_port'] as String?;
+
+      if (fromNode == null || fromPort == null || toNode == null || toPort == null) {
+        debugPrint('NodesField: add_link failed - missing args: $args');
+        return {'error': 'missing_args', 'args': args};
+      }
+
+      // Validate nodes and ports exist to give better diagnostics
+      if (!controller.nodes.containsKey(fromNode)) {
+        debugPrint('NodesField: add_link failed - source node not found: $fromNode');
+        return {'error': 'source_node_not_found', 'node': fromNode};
+      }
+      if (!controller.nodes.containsKey(toNode)) {
+        debugPrint('NodesField: add_link failed - target node not found: $toNode');
+        return {'error': 'target_node_not_found', 'node': toNode};
+      }
+
+      final fromNodeModel = controller.nodes[fromNode]!;
+      final toNodeModel = controller.nodes[toNode]!;
+
+      if (!fromNodeModel.ports.containsKey(fromPort)) {
+        debugPrint('NodesField: add_link failed - source port not found: $fromPort on $fromNode');
+        return {'error': 'source_port_not_found', 'node': fromNode, 'port': fromPort};
+      }
+      if (!toNodeModel.ports.containsKey(toPort)) {
+        debugPrint('NodesField: add_link failed - target port not found: $toPort on $toNode');
+        return {'error': 'target_port_not_found', 'node': toNode, 'port': toPort};
+      }
+
+      // Attempt to add link
+      final link = controller.addLink(fromNode, fromPort, toNode, toPort);
+      if (link != null) {
+        return {'id': link.id};
+      }
+
+      debugPrint('NodesField: add_link - controller rejected link: $fromNode.$fromPort -> $toNode.$toPort');
+      return {'error': 'rejected_by_controller'};
+    } catch (e) {
+      debugPrint('NodesField: add_link failed: $e');
+      return {'error': 'exception', 'message': e.toString()};
+    }
   }
 
   @override

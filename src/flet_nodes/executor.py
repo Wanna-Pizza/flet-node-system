@@ -7,7 +7,7 @@ using recursive pull-based evaluation with result caching.
 
 import asyncio
 from typing import Any, Dict, Optional, Set
-from .runtime_graph import Graph, RuntimeNode, ExecutionState
+from .runtime_graph import Graph, RuntimeNode, ExecutionState, SocketKind
 from .node_logic import get_node_logic
 
 
@@ -40,35 +40,38 @@ class AsyncGraphExecutor:
     def __init__(self, graph: Graph):
         self.graph = graph
         self._execution_stack: Set[str] = set()  # for cycle detection during execution
+        self._history: list[tuple[str, Dict[str, Any]]] = []  # record (node_id, result) in order
     
-    async def execute(self, node_id: str, clear_cache: bool = False) -> Dict[str, Any]:
+    async def execute(self, node_id: str, clear_cache: bool = False, context: Optional[object] = None) -> Dict[str, Any]:
         """
         Execute a node and return its outputs.
-        
+
         Args:
             node_id: ID of the node to execute
             clear_cache: If True, clear all cached results before execution
-        
+            context: Optional execution context passed to node logic (if supported)
+
         Returns:
             Dict mapping output socket ids to their values
-            
+
         Raises:
             ExecutionError: If node execution fails
             CyclicDependencyError: If a cycle is detected
         """
-        if clear_cache:
+        # automatically invalidate caches if any UI-backed node exists
+        if clear_cache or any(getattr(n, 'ui_content', None) is not None for n in self.graph.nodes.values()):
             self.graph.clear_all_caches()
-        
+
         if node_id not in self.graph.nodes:
             raise ExecutionError(f"Node {node_id} not found in graph")
-        
+
         # validate graph before execution
         is_valid, error_msg = self.graph.validate()
         if not is_valid:
             raise ExecutionError(f"Graph validation failed: {error_msg}")
-        
+
         try:
-            result = await self._execute_node(node_id)
+            result = await self._execute_node(node_id, context=context)
             return result
         except Exception as e:
             # mark node as error
@@ -78,8 +81,12 @@ class AsyncGraphExecutor:
             raise
         finally:
             self._execution_stack.clear()
+
+    def get_execution_history(self) -> list[tuple[str, Dict[str, Any]]]:
+        """Return the recorded history of node executions (node_id, result)."""
+        return list(self._history)
     
-    async def _execute_node(self, node_id: str) -> Dict[str, Any]:
+    async def _execute_node(self, node_id: str, context: Optional[object] = None) -> Dict[str, Any]:
         """
         Internal recursive execution method.
         
@@ -112,12 +119,12 @@ class AsyncGraphExecutor:
             # Step 3: Mark as running
             node.set_state(ExecutionState.RUNNING)
             
-            # Step 4: Collect dependencies
-            dependencies = self.graph.get_dependencies(node_id)
+            # Step 4: Collect DATA dependencies only (ignore EXEC connections)
+            dependencies = self.graph.get_dependencies(node_id, kind=SocketKind.DATA)
             
-            # Step 5: Execute dependencies in parallel using asyncio.gather
+            # Step 5: Execute DATA dependencies in parallel using asyncio.gather
             if dependencies:
-                await asyncio.gather(*[self._execute_node(dep_id) for dep_id in dependencies])
+                await asyncio.gather(*[self._execute_node(dep_id, context=context) for dep_id in dependencies])
             
             # Step 6: Gather input values from connected outputs
             input_values = {}
@@ -141,11 +148,21 @@ class AsyncGraphExecutor:
                 if not is_valid:
                     raise ExecutionError(f"Input validation failed for node {node_id}: {error_msg}")
                 
-                # execute
-                result = await logic.execute(node, **input_values)
+                # execute (pass context if provided; some node logic expects it)
+                if context is not None:
+                    result = await logic.execute(node, context=context, **input_values)
+                else:
+                    result = await logic.execute(node, **input_values)
             
             # Step 8: Cache result
             node.cache_result(result)
+            
+            # record history and print to console
+            try:
+                self._history.append((node_id, result))
+                print(f"{node_id}: {result}")
+            except Exception:
+                pass
             
             # Step 9: Update output sockets
             for output_id, value in result.items():
@@ -172,7 +189,8 @@ class AsyncGraphExecutor:
         Returns:
             Dict mapping node_id to its result dict
         """
-        if clear_cache:
+        # clear caches explicitly or when any UI content present
+        if clear_cache or any(getattr(n, 'ui_content', None) is not None for n in self.graph.nodes.values()):
             self.graph.clear_all_caches()
         
         # validate graph once
@@ -204,7 +222,7 @@ class AsyncGraphExecutor:
             visited.add(nid)
             
             # visit dependencies first
-            for dep in self.graph.get_dependencies(nid):
+            for dep in self.graph.get_dependencies(nid, kind=SocketKind.DATA):
                 dfs(dep)
             
             order.append(nid)

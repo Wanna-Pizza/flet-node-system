@@ -4,6 +4,13 @@ site_author: 'Flet Contributors'
 repo_url: https://github.com/Wanna-Pizza/flet-node-system
 repo_name: flet-node-system
 
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+
 theme:
   name: material
   features:
@@ -12,9 +19,21 @@ theme:
     - content.code.copy
     - content.code.annotate
   palette:
+
+  # Dark mode
+    - scheme: slate
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    # Light mode
     - scheme: default
       primary: blue
       accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
 
 plugins:
   - mkdocstrings:
@@ -29,5 +48,6 @@ nav:
   - Development: development.md
   - Architecture: architecture.md
   - Examples: examples.md
+  - ForEach: foreach.md
   - Engine: engine.md
   - Building: building.md

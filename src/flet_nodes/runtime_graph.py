@@ -18,11 +18,18 @@ class ExecutionState(Enum):
     ERROR = "error"
 
 
+class SocketKind(Enum):
+    """Kind of socket - determines what flows through the connection."""
+    DATA = "data"  # carries values
+    EXEC = "exec"  # controls execution order
+
+
 @dataclass
 class InputSocket:
     """Input socket on a runtime node."""
     id: str
     display_name: str
+    kind: SocketKind = SocketKind.DATA  # socket kind (DATA or EXEC)
     type: Optional[str] = None
     default: Any = None
     connected_from: Optional['OutputSocket'] = None  # link to source output
@@ -39,6 +46,7 @@ class OutputSocket:
     """Output socket on a runtime node."""
     id: str
     display_name: str
+    kind: SocketKind = SocketKind.DATA  # socket kind (DATA or EXEC)
     type: Optional[str] = None
     value: Any = None  # computed value after execution
     connected_to: List['InputSocket'] = field(default_factory=list)  # downstream inputs
@@ -51,9 +59,10 @@ class Connection:
     from_port: str  # output socket id
     to_node: str    # node id
     to_port: str    # input socket id
+    kind: SocketKind = SocketKind.DATA  # connection kind (DATA or EXEC)
     
     def __hash__(self):
-        return hash((self.from_node, self.from_port, self.to_node, self.to_port))
+        return hash((self.from_node, self.from_port, self.to_node, self.to_port, self.kind))
     
     def __eq__(self, other):
         if not isinstance(other, Connection):
@@ -61,7 +70,8 @@ class Connection:
         return (self.from_node == other.from_node and 
                 self.from_port == other.from_port and
                 self.to_node == other.to_node and 
-                self.to_port == other.to_port)
+                self.to_port == other.to_port and
+                self.kind == other.kind)
 
 
 class RuntimeNode:
@@ -99,10 +109,16 @@ class RuntimeNode:
         self.state = ExecutionState.DONE
     
     def clear_cache(self):
-        """Clear cached result."""
+        """Clear cached result and reset output socket values."""
         self.cached_result = None
         self.state = ExecutionState.IDLE
         self.error = None
+        # clear any previously stored output socket values to avoid stale reads
+        for out in self.outputs.values():
+            try:
+                out.value = None
+            except Exception:
+                pass
     
     def get_input_value(self, input_id: str) -> Any:
         """Get value from input socket."""
@@ -213,14 +229,19 @@ class Graph:
                 self._connection_map[conn.to_node] = {}
             self._connection_map[conn.to_node][conn.to_port] = conn
     
-    def get_dependencies(self, node_id: str) -> List[str]:
-        """Get list of node IDs that feed into this node."""
+    def get_dependencies(self, node_id: str, kind: Optional["SocketKind"] = None) -> List[str]:
+        """Get list of node IDs that feed into this node.
+
+        If `kind` is provided, only connections of that SocketKind are
+        considered (useful to distinguish DATA vs EXEC dependencies).
+        """
         if node_id not in self._connection_map:
             return []
         
         deps = set()
         for conn in self._connection_map[node_id].values():
-            deps.add(conn.from_node)
+            if kind is None or conn.kind == kind:
+                deps.add(conn.from_node)
         return list(deps)
     
     def get_dependents(self, node_id: str) -> List[str]:
@@ -231,8 +252,31 @@ class Graph:
                 dependents.add(conn.to_node)
         return list(dependents)
     
-    def has_cycle(self) -> bool:
-        """Check if graph contains cycles using DFS."""
+    def get_exec_target(self, node_id: str, output_id: str) -> Optional[str]:
+        """
+        Find execution target for a given output socket on a node.
+        
+        Returns the node_id of the connected node via an EXEC connection,
+        or None if no EXEC connection exists.
+        """
+        for conn in self.connections:
+            if (conn.from_node == node_id and 
+                conn.from_port == output_id and 
+                conn.kind == SocketKind.EXEC):
+                return conn.to_node
+        return None
+    
+    def has_cycle(self, kind: Optional[SocketKind] = None) -> bool:
+        """
+        Check if graph contains cycles using DFS.
+        
+        Args:
+            kind: If specified, only check cycles in connections of this kind.
+                  If None, check all DATA connections (EXEC cycles are allowed).
+        """
+        if kind is None:
+            kind = SocketKind.DATA  # default: check DATA cycles only
+        
         visited = set()
         rec_stack = set()
         
@@ -240,12 +284,15 @@ class Graph:
             visited.add(node_id)
             rec_stack.add(node_id)
             
-            for dep in self.get_dependents(node_id):
-                if dep not in visited:
-                    if dfs(dep):
+            # only follow connections of the specified kind
+            for conn in self.connections:
+                if conn.from_node == node_id and conn.kind == kind:
+                    dep = conn.to_node
+                    if dep not in visited:
+                        if dfs(dep):
+                            return True
+                    elif dep in rec_stack:
                         return True
-                elif dep in rec_stack:
-                    return True
             
             rec_stack.remove(node_id)
             return False
@@ -265,12 +312,18 @@ class Graph:
         """
         Validate graph structure.
         
+        Rules:
+        - DATA connections must not create cycles
+        - EXEC connections are allowed to have cycles
+        - All connections must reference valid nodes/ports
+        - Socket kinds must match (DATA to DATA, EXEC to EXEC)
+        
         Returns:
             (is_valid, error_message)
         """
-        # check for cycles
-        if self.has_cycle():
-            return False, "Graph contains cycles"
+        # check for DATA cycles (EXEC cycles are allowed)
+        if self.has_cycle(SocketKind.DATA):
+            return False, "Graph contains DATA cycles (not allowed)"
         
         # check that all connections reference valid nodes/ports
         for conn in self.connections:
@@ -286,5 +339,14 @@ class Graph:
                 return False, f"Connection references missing output port: {conn.from_port}"
             if conn.to_port not in to_node.inputs:
                 return False, f"Connection references missing input port: {conn.to_port}"
+            
+            # check socket kinds match
+            from_socket = from_node.outputs[conn.from_port]
+            to_socket = to_node.inputs[conn.to_port]
+            
+            if from_socket.kind != conn.kind:
+                return False, f"Output socket {conn.from_port} kind {from_socket.kind} doesn't match connection kind {conn.kind}"
+            if to_socket.kind != conn.kind:
+                return False, f"Input socket {conn.to_port} kind {to_socket.kind} doesn't match connection kind {conn.kind}"
         
         return True, None
