@@ -199,6 +199,7 @@ FlLinkStyle flDefaultLinkStyleBuilder(FlLinkState state) =>
 enum FlPortShape {
   circle,
   triangle,
+  diamond,
 }
 
 class FlPortStyle {

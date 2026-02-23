@@ -268,61 +268,86 @@ class NodesFieldControlState extends State<NodesFieldControl>
           final label = (spec is Map && spec['displayName'] != null) ? spec['displayName'].toString() : id.toString();
           final typeLabel = (spec is Map && spec['type'] != null) ? spec['type'].toString() : null;
 
-          // Special-case control/execution ports
-          if (typeLabel == 'exec' || typeLabel == 'execution') {
-            portPrototypes.add(FlControlInputPortPrototype(
-              idName: id.toString(),
-              displayName: (ctx) => label,
-              geometricOrientation: FlPortGeometricOrientation.left,
-              styleBuilder: flDefaultPortStyleBuilder,
-            ));
-            return;
-          }
+          // Switch-based type handling for input ports
+          switch (typeLabel) {
+            // Control/execution ports - white style
+            case 'exec':
+            case 'execution':
+              portPrototypes.add(FlControlInputPortPrototype(
+                idName: id.toString(),
+                displayName: (ctx) => label,
+                geometricOrientation: FlPortGeometricOrientation.left,
+                styleBuilder: (state) {
+                  return FlPortStyle.basic().copyWith(
+                      color: Colors.white,
+                      linkStyleBuilder: (linkState) =>
+                          FlLinkStyle.basic().copyWith(color: Colors.white));
+                },
+              ));
+              break;
 
-          if (typeLabel != null && _typeRegistry.has(typeLabel)) {
-            final entry = _typeRegistry.getEntry(typeLabel)!;
-            switch (entry.dartName) {
-              case 'double':
-                portPrototypes.add(FlDataInputPortPrototype<double>(
-                  idName: id.toString(),
-                  displayName: (ctx) => label,
-                  geometricOrientation: FlPortGeometricOrientation.left,
-                ));
-                break;
-              case 'int':
-                portPrototypes.add(FlDataInputPortPrototype<int>(
-                  idName: id.toString(),
-                  displayName: (ctx) => label,
-                  geometricOrientation: FlPortGeometricOrientation.left,
-                ));
-                break;
-              case 'String':
-                portPrototypes.add(FlDataInputPortPrototype<String>(
-                  idName: id.toString(),
-                  displayName: (ctx) => label,
-                  geometricOrientation: FlPortGeometricOrientation.left,
-                ));
-                break;
-              case 'bool':
-                portPrototypes.add(FlDataInputPortPrototype<bool>(
-                  idName: id.toString(),
-                  displayName: (ctx) => label,
-                  geometricOrientation: FlPortGeometricOrientation.left,
-                ));
-                break;
-              default:
+            // List ports - pink diamond shape
+            case 'list':
+              portPrototypes.add(FlDataInputPortPrototype<dynamic>(
+                idName: id.toString(),
+                displayName: (ctx) => label,
+                geometricOrientation: FlPortGeometricOrientation.left,
+                styleBuilder: (state) => FlPortStyle.basic().copyWith(
+                    shape: FlPortShape.diamond,
+                    color: Colors.pinkAccent,
+                    linkStyleBuilder: (linkState) =>
+                        FlLinkStyle.basic().copyWith(color: Colors.pinkAccent)),
+              ));
+              break;
+
+            // Typed ports from registry
+            default:
+              if (typeLabel != null && _typeRegistry.has(typeLabel)) {
+                final entry = _typeRegistry.getEntry(typeLabel)!;
+                switch (entry.dartName) {
+                  case 'double':
+                    portPrototypes.add(FlDataInputPortPrototype<double>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      geometricOrientation: FlPortGeometricOrientation.left,
+                    ));
+                    break;
+                  case 'int':
+                    portPrototypes.add(FlDataInputPortPrototype<int>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      geometricOrientation: FlPortGeometricOrientation.left,
+                    ));
+                    break;
+                  case 'String':
+                    portPrototypes.add(FlDataInputPortPrototype<String>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      geometricOrientation: FlPortGeometricOrientation.left,
+                    ));
+                    break;
+                  case 'bool':
+                    portPrototypes.add(FlDataInputPortPrototype<bool>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      geometricOrientation: FlPortGeometricOrientation.left,
+                    ));
+                    break;
+                  default:
+                    portPrototypes.add(FlDataInputPortPrototype<dynamic>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      geometricOrientation: FlPortGeometricOrientation.left,
+                    ));
+                }
+              } else {
                 portPrototypes.add(FlDataInputPortPrototype<dynamic>(
                   idName: id.toString(),
                   displayName: (ctx) => label,
                   geometricOrientation: FlPortGeometricOrientation.left,
                 ));
-            }
-          } else {
-            portPrototypes.add(FlDataInputPortPrototype<dynamic>(
-              idName: id.toString(),
-              displayName: (ctx) => label,
-              geometricOrientation: FlPortGeometricOrientation.left,
-            ));
+              }
+              break;
           }
         } catch (e) {
           debugPrint('NodesField: failed to build input port prototype: $e');
@@ -336,67 +361,93 @@ class NodesFieldControlState extends State<NodesFieldControl>
           final typeLabel = (spec is Map && spec['type'] != null) ? spec['type'].toString() : null;
           final link = FlLinkPrototype(label: (_) => typeLabel ?? '');
 
-          // Control / exec output ports
-          if (typeLabel == 'exec' || typeLabel == 'execution') {
-            portPrototypes.add(FlControlOutputPortPrototype(
-              idName: id.toString(),
-              displayName: (ctx) => label,
-              geometricOrientation: FlPortGeometricOrientation.right,
-              styleBuilder: flDefaultPortStyleBuilder,
-            ));
-            return;
-          }
+          // Switch-based type handling for output ports
+          switch (typeLabel) {
+            // Control/execution ports - white style
+            case 'exec':
+            case 'execution':
+              portPrototypes.add(FlControlOutputPortPrototype(
+                idName: id.toString(),
+                displayName: (ctx) => label,
+                geometricOrientation: FlPortGeometricOrientation.right,
+                styleBuilder: (state) {
+                  return FlPortStyle.basic().copyWith(
+                      color: Colors.white,
+                      linkStyleBuilder: (linkState) =>
+                          FlLinkStyle.basic().copyWith(color: Colors.white));
+                },
+              ));
+              break;
 
-          if (typeLabel != null && _typeRegistry.has(typeLabel)) {
-            final entry = _typeRegistry.getEntry(typeLabel)!;
-            switch (entry.dartName) {
-              case 'double':
-                portPrototypes.add(FlDataOutputPortPrototype<double>(
-                  idName: id.toString(),
-                  displayName: (ctx) => label,
-                  linkPrototype: link,
-                  geometricOrientation: FlPortGeometricOrientation.right,
-                ));
-                break;
-              case 'int':
-                portPrototypes.add(FlDataOutputPortPrototype<int>(
-                  idName: id.toString(),
-                  displayName: (ctx) => label,
-                  linkPrototype: link,
-                  geometricOrientation: FlPortGeometricOrientation.right,
-                ));
-                break;
-              case 'String':
-                portPrototypes.add(FlDataOutputPortPrototype<String>(
-                  idName: id.toString(),
-                  displayName: (ctx) => label,
-                  linkPrototype: link,
-                  geometricOrientation: FlPortGeometricOrientation.right,
-                ));
-                break;
-              case 'bool':
-                portPrototypes.add(FlDataOutputPortPrototype<bool>(
-                  idName: id.toString(),
-                  displayName: (ctx) => label,
-                  linkPrototype: link,
-                  geometricOrientation: FlPortGeometricOrientation.right,
-                ));
-                break;
-              default:
+            // List ports - pink diamond shape
+            case 'list':
+              portPrototypes.add(FlDataOutputPortPrototype<dynamic>(
+                idName: id.toString(),
+                displayName: (ctx) => label,
+                linkPrototype: link,
+                geometricOrientation: FlPortGeometricOrientation.right,
+                styleBuilder: (state) => FlPortStyle.basic().copyWith(
+                    shape: FlPortShape.diamond,
+                    color: Colors.pinkAccent,
+                    linkStyleBuilder: (linkState) =>
+                        FlLinkStyle.basic().copyWith(color: Colors.pinkAccent)),
+              ));
+              break;
+
+            // Typed ports from registry
+            default:
+              if (typeLabel != null && _typeRegistry.has(typeLabel)) {
+                final entry = _typeRegistry.getEntry(typeLabel)!;
+                switch (entry.dartName) {
+                  case 'double':
+                    portPrototypes.add(FlDataOutputPortPrototype<double>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      linkPrototype: link,
+                      geometricOrientation: FlPortGeometricOrientation.right,
+                    ));
+                    break;
+                  case 'int':
+                    portPrototypes.add(FlDataOutputPortPrototype<int>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      linkPrototype: link,
+                      geometricOrientation: FlPortGeometricOrientation.right,
+                    ));
+                    break;
+                  case 'String':
+                    portPrototypes.add(FlDataOutputPortPrototype<String>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      linkPrototype: link,
+                      geometricOrientation: FlPortGeometricOrientation.right,
+                    ));
+                    break;
+                  case 'bool':
+                    portPrototypes.add(FlDataOutputPortPrototype<bool>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      linkPrototype: link,
+                      geometricOrientation: FlPortGeometricOrientation.right,
+                    ));
+                    break;
+                  default:
+                    portPrototypes.add(FlDataOutputPortPrototype<dynamic>(
+                      idName: id.toString(),
+                      displayName: (ctx) => label,
+                      linkPrototype: link,
+                      geometricOrientation: FlPortGeometricOrientation.right,
+                    ));
+                }
+              } else {
                 portPrototypes.add(FlDataOutputPortPrototype<dynamic>(
                   idName: id.toString(),
                   displayName: (ctx) => label,
                   linkPrototype: link,
                   geometricOrientation: FlPortGeometricOrientation.right,
                 ));
-            }
-          } else {
-            portPrototypes.add(FlDataOutputPortPrototype<dynamic>(
-              idName: id.toString(),
-              displayName: (ctx) => label,
-              linkPrototype: link,
-              geometricOrientation: FlPortGeometricOrientation.right,
-            ));
+              }
+              break;
           }
         } catch (e) {
           debugPrint('NodesField: failed to build output port prototype: $e');

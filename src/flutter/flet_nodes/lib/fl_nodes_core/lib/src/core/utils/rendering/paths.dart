@@ -358,19 +358,30 @@ final class PathUtils {
   }
 
   static Path computeTrianglePortPath(PortPaintModel data) {
+    final r = data.style.radius;
     return Path()
       ..moveTo(
-        data.offset.dx - data.style.radius,
-        data.offset.dy - data.style.radius,
+        data.offset.dx - r,
+        data.offset.dy - r,
       ) // Top-left
       ..lineTo(
-        data.offset.dx + data.style.radius,
+        data.offset.dx + r,
         data.offset.dy,
       ) // Middle-right (apex)
       ..lineTo(
-        data.offset.dx - data.style.radius,
-        data.offset.dy + data.style.radius,
+        data.offset.dx - r,
+        data.offset.dy + r,
       ) // Bottom-left
+      ..close();
+  }
+  
+  static Path computeDiamondPortPath(PortPaintModel data) {
+    final r = data.style.radius;
+    return Path()
+      ..moveTo(data.offset.dx, data.offset.dy - r)
+      ..lineTo(data.offset.dx + r, data.offset.dy)
+      ..lineTo(data.offset.dx, data.offset.dy + r)
+      ..lineTo(data.offset.dx - r, data.offset.dy)
       ..close();
   }
 

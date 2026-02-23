@@ -664,6 +664,9 @@ class NodeEditorRenderBox extends RenderBox
           case FlPortShape.triangle:
             path = PathUtils.computeTrianglePortPath(data);
             break;
+          case FlPortShape.diamond:
+            path = PathUtils.computeDiamondPortPath(data);
+            break;
         }
 
         portsHitTestData.add((data.locator, path.getBounds()));
